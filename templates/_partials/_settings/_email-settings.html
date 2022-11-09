@@ -1,0 +1,56 @@
+
+<!-- Row -->
+<div class="row">
+  <div class="col-xl-12 col-md-12 col-lg-12">
+    <div class="card">
+      <div class="card-header  border-0">
+        <h4 class="card-title">Email Summary <a href="#" class="btn btn-primary btn-sm mr-3" data-toggle="modal" data-target="#adddemailmodal" data-backdrop="static" data-keyboard="false">Add Email</a></h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered text-nowrap border-bottom my_res_table">
+            <thead>
+              <tr>
+                <th class="border-bottom-0 w-5">Name</th>
+                <th class="border-bottom-0">Sender Mail</th>
+                <th class="border-bottom-0">Sender Name</th>
+                <th class="border-bottom-0">SMPT Host</th>
+                <th class="border-bottom-0">SMPT Username</th>
+                <th class="border-bottom-0">SMPT Password</th>
+                <th class="border-bottom-0">SMPT Port</th>
+                <th class="border-bottom-0">DEFAULT SERVER</th>
+                <th class="border-bottom-0">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for dt in email %}
+              <tr>
+                      <td>{{dt.Name}}</td>
+                      <td>{{dt.Sender_Email}}</td>
+                      <td>{{dt.Sender_Name}}</td>
+                      <td>{{dt.SMTP_Host}}</td>
+                      <td>{{dt.SMTP_User}}</td>
+                      <td>{{dt.SMTP_Password}}</td>
+                      <td>{{dt.SMTP_Port}}</td>
+                      <td>{{dt.Default_Server}}</td>
+                      <td>
+                        <a class="btn btn-primary btn-icon btn-sm" data-toggle="modal" data-target="#email-edit{{email.id}}" data-backdrop="static" data-keyboard="false">
+                          <i class="feather feather-edit" data-toggle="tooltip" data-original-title="Edit"></i>
+                        </a>
+                        <a href="settings/email-delete" onclick="return confirm('Are sure you want to Delete? ')" class="btn btn-danger btn-icon btn-sm" ><i class="feather feather-trash-2"></i></a>
+                      </td>
+                    </tr>
+                    {% include '_partials/_settings/_email-edit.html' %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Row-->
+
+{% include '_partials/_settings/_add-email.html' %}
+
+

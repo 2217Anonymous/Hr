@@ -1,0 +1,20 @@
+{% extends './_add-email.html' %}
+
+{% block modelId %} id="email-edit{{email.id}}" {% endblock modelId %}
+
+{% block modelTitle %} Edit Email {% endblock modelTitle %}
+
+{% block modelAction %} action="{% url 'email-edit' %}" {% endblock modelAction %}
+
+{% block valueId %}
+    <input type="hidden" value="{{email.id}}" name="id"/>
+{% endblock valueId %}
+
+{% block valueName %} value="{{email.Name}}" {% endblock valueName %}
+{% block valueSenderEmail %} value="{{email.Sender_Email}}" {% endblock valueSenderEmail %}
+{% block valueSenderName %} value="{{email.Sender_Name}}" {% endblock valueSenderName %}
+{% block valueSMTPHost %} value="{{email.SMTP_Host}}" {% endblock valueSMTPHost %}
+{% block valueSMTPUser %} value="{{email.SMTP_User}}" {% endblock valueSMTPUser %}
+{% block valueSMTPPassword %} value="{{email.SMTP_Password}}" {% endblock valueSMTPPassword %}
+{% block valueSAMTPPort %} value="{{email.SMTP_Port}}" {% endblock valueSAMTPPort %}
+{% block valueDefaultServer %} value="{{email.Default_Server}}" {% endblock valueDefaultServer %}

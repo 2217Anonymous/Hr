@@ -1,0 +1,130 @@
+{% extends '../_partials/_admin_base.html' %}
+{% block title %} Department {% endblock title %} 
+{% load static %}
+{% block content %}
+<!--Page header-->
+<div class="page-header d-xl-flex d-block">
+  <div class="page-leftheader">
+    <h4 class="page-title"> Master <span class="font-weight-normal text-muted ml-2">Department</span></h4>
+  </div>
+</div>
+<!--End Page header-->
+
+<!--Row-->
+<div class="row">
+  <div class="col-lg-5">
+    <div class="card">
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title">Department</h3>
+      </div>
+      <div class="card-body">
+        <form action="/master/department/" method="POST">
+            {% csrf_token %}
+          <label class="form-label">Department Name <span class="text-red">*</span> </label>
+          <div class="wd-150 mg-b-30">
+            <div class="input-group">
+              <div class="input-group-prepend">
+              </div><!-- input-group-prepend -->
+              <input type="text" class="form-control" placeholder="Department Name" name="Department_Name" id="Department_Name" />
+            </div>  
+            <span class="tx-danger" style="color:red">{{fm.errors.Department_Name}}</span>
+          </div><!-- wd-150 -->   
+          <br>  
+          <label class="form-label">Department Head <span class="text-red">*</span> </label>
+          <div class="wd-150 mg-b-30">
+            <div class="input-group">
+              <div class="input-group-prepend">
+              </div><!-- input-group-prepend -->
+              <input type="text" class="form-control" placeholder="Department Head" name="Department_Head" id="Department_Head" />              
+            </div>
+            <span class="tx-danger" style="color:red">{{fm.errors.Department_Head}}</span><!-- wd-150 -->
+          </div>
+          <br />
+          <label class="form-label">Status</label>
+          <div class="custom-controls-stacked mb-4">
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" name="status" id='status' checked>
+              <span class="custom-control-label">Active</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" name="status" id='status'>
+              <span class="custom-control-label">De-Active</span>
+            </label>
+          </div> 
+          <span class="tx-danger" style="color:red">{{fm.errors.status}}</span>
+        </div>
+        <div class="card-footer">
+          <button type="submit" name="submit" class="btn btn-success">Save Changes</button>
+          <button type="reset" class="btn btn-danger">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <div class="card">
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title">Department List</h3>
+      </div>
+      <div class=" card-body">
+        <div class="table-responsive attendance_table mt-4 border-top">
+          <table class="mb-0 table table-bordered text-nowrap border-bottom my-datatable">
+            <thead>
+              <tr>
+                {% comment %} <th class="wd-15p border-bottom-0">Id</th> {% endcomment %}
+                <th class="wd-15p border-bottom-0">Department Name</th>
+                <th class="wd-15p border-bottom-0">Department Head</th>
+                <th class="wd-15p border-bottom-0">Status</th>
+                {% comment %} <th class="wd-15p border-bottom-0">Created At</th> {% endcomment %}
+                <th class="wd-15p border-bottom-0">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for dt in tbl_data %}
+                <tr class="border-bottom">
+                  {% comment %} <td class="text-center"><span class="avatar avatar-sm brround">{{dt.id}}</span></td> {% endcomment %}
+                  <td class="font-weight-semibold fs-14">{{dt.Department_Name}}</td>
+                  <td class="font-weight-semibold fs-14">{{dt.Department_Head}}</td>
+                  {% if dt.status %}
+                    <td class="text-center text-success"><span class="badge bg-success-transparent"></span>{{ dt.status }}</td>
+                  {% else %}
+                    <td class="text-center text-danger"><span class="badge bg-danger-transparent"></span>{{ dt.status }}</td>
+                  {% endif %} 
+                  {% comment %} <td class="text-center">{{dt.updated_at}}</td> {% endcomment %}
+                  <td class="text-center">
+                    <a class="action-btns" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" data-bs-target="#edit-dept-model{{dt.id}}" data-bs-backdrop="static" data-bs-keyboard="false" title="Edit">
+                      <i class="feather feather-edit-3 primary text-success"></i>
+                    </a>
+                    <a href={% url 'dept-delete' dt.id %} onclick="return confirm('Are sure you want to Delete? ')" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                      <i class="feather feather-trash-2 text-danger"></i>
+                    </a>
+                  </td>
+                </tr>
+                {% include '_partials/master/_department-edit.html' %}
+              {% endfor %}
+            </tbody>
+          </table>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).on('submit','#post-form',function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type:'POST',
+      url:'/master/department/',
+      data :{
+        department  : $('#Department_Name').val(),
+        dept_head   : $('#Department_Head').val(),
+        status : $('#status').val(),
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+      },
+      success : function(){
+
+      }
+    })
+  })
+</script>
+{% endblock %}

@@ -1,0 +1,66 @@
+<div class="modal fade" id="edit-designation-model{{dt.id}}" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Designation</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" ><span aria-hidden="true">&times;</span></button>
+            </div>
+            <form action="/master/designation-edit/" method="POST">
+                <div class="modal-body">
+                    {% for message in messages %}
+                        <p style="color:red;">{{message}}</p>
+                    {% endfor %}
+                    {% csrf_token %}
+                    <input type="hidden" value="{{dt.id}}" name="id"/>
+                    <label class="form-label">Department Name</label>
+                    <div class="wd-150 mg-b-30">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            </div><!-- input-group-prepend -->
+                            <select class="form-control select2-selection select2-selection--single custom-select" name="Department_Name" data-bs-placeholder="Choose one">
+                                {% block option %}
+                                    <option value="{{dt.Department_Name_id}}">{{ dt.Department_Name }}</option>
+                                {% endblock option %}
+                                {% for data in drop_data %}
+                                    <option value="{{data.id}}">{{ data.Department_Name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div><!-- wd-150 -->
+                    <br/>
+                    <label class="form-label">Designation</label>
+                    <div class="wd-150 mg-b-30">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            </div><!-- input-group-prepend -->
+                            <input type="text" class="form-control" value="{{dt.Designation}}" name="Designation" id="Designation" placeholder="Designation">
+                        </div>
+                    </div><!-- wd-150 -->             
+                    <br />
+                    <label class="form-label">Description</label>
+                    <div class="wd-150 mg-b-30">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            </div><!-- input-group-prepend -->
+                            <textarea class="form-control mb-4" value="" name="Description" placeholder="Textarea" rows="3">{{dt.Description}}</textarea>            
+                        </div>
+                    </div><!-- wd-150 --> 
+                    <br/>
+                    <label class="form-label">Status</label>
+                    <div class="custom-controls-stacked">
+                        <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="status" value=true checked>
+                            <span class="custom-control-label">Active</span>
+                        </label>
+                        <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="status" value=false>
+                            <span class="custom-control-label">De-Active</span>
+                        </label>
+                    </div> 
+                    <hr />
+                    <button type="submit" name="submit" class="btn btn-success">Save Changes</button>
+                    <button type="reset" class="btn btn-danger">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

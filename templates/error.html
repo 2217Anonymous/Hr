@@ -1,0 +1,12 @@
+{% extends '_partials/_admin_base.html' %}
+{% block title %} error {% endblock title %} 
+{% load static %}
+{% block content %}
+<!--Page header-->
+<div class="page-header d-xl-flex d-block">
+  <div class="page-leftheader">
+    <h4 class="page-title"> Error <span class="font-weight-normal text-muted ml-2">{{error}}</span></h4>
+  </div>
+</div>
+<!--End Page header-->
+{% endblock %}

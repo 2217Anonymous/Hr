@@ -1,0 +1,72 @@
+{% extends '../_partials/_admin_base.html' %}
+{% load static %}
+{% block content %}
+<!--Page header-->
+<div class="page-header d-xl-flex d-block">
+  <div class="page-leftheader">
+    <h4 class="page-title">Settings</h4>
+  </div>
+  <div class="page-rightheader ml-md-auto">
+    <div class="d-flex align-items-end flex-wrap my-auto right-content breadcrumb-right">
+      <div class="btn-list">
+        <button  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </button>
+        <button  class="btn btn-light" data-placement="top" data-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </button>
+        <button  class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Page header-->
+
+<!-- Row -->
+<div class="row">
+  <div class="col-lg-12 col-md-12">
+    <form  method="post" action="{% url 'theme' %}" enctype="multipart/form-data" class="card">
+      {% csrf_token %}
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title">Theme Settings</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-label">Website Name</label>
+              {{fm.Web_Name}}
+              <span class="tx-danger" style="color:red">{{fm.errors.Web_Name}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label class="form-label">Upload Logo</label>
+              <input type="file" class="dropify" name="Logo" data-height="180" />
+              <span class="tx-danger" style="color:red">{{fm.errors.Logo}}</span>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label class="form-label">Upload Favicon</label>
+              <input type="file" class="dropify" name="Favicon" data-height="180" />
+              <span class="tx-danger" style="color:red">{{fm.errors.Favicon}}</span>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label class="form-label">Upload Login</label>
+              <input type="file" class="dropify" name="Login" data-height="180" />
+              <span class="tx-danger" style="color:red">{{fm.errors.Login}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <button type="reset" class="btn btn-danger  ">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>           
+						<!-- End Row-->
+<!-- End Row -->
+{% endblock %}

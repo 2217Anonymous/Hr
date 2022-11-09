@@ -1,0 +1,44 @@
+{% extends '../_partials/_admin_base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-header d-xl-flex d-block">
+  <div class="page-leftheader">
+    <h4 class="page-title">Settings</h4>
+  </div>
+  <div class="page-rightheader ml-md-auto">
+    <div class="d-flex align-items-end flex-wrap my-auto right-content breadcrumb-right">
+      <div class="btn-list">
+        <button  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </button>
+        <button  class="btn btn-light" data-placement="top" data-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </button>
+        <button  class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Page header-->
+
+<!-- Row -->
+<div class="row">
+    <div class="col-md-6 col-xl-6">
+        {% include '../_partials/_settings/_company-settings.html' %}
+        {% include '../_partials/_settings/_salary_settings.html' %} 
+        {% include '../_partials/_settings/_leave.html' %}
+    </div>
+
+    <div class="col-md-6 col-xl-6">
+        {% include '../_partials/_settings/_theme.html' %}
+        {% include '../_partials/_settings/_localization.html' %}
+        {% include '../_partials/_settings/_notification.html' %}
+        {% include '../_partials/_settings/_email-settings.html' %}
+    </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    {% include '../_partials/_settings/_permission.html' %} 
+  </div>
+</div>
+<!-- End Row -->
+<script>
+    document.getElementById("Company_Name").innerHTML="{{dt.CompanyName}}";
+</script>
+{% endblock %}

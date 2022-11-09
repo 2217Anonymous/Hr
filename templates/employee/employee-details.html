@@ -1,0 +1,927 @@
+{% extends '../_partials/_admin_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!--Page header-->
+
+<div class="page-header d-xl-flex d-block">
+
+    <div class="page-leftheader">
+
+        <h4 class="page-title">Employee <span class="font-weight-normal text-muted ml-2">Details</span></h4>
+
+    </div>
+
+    <div class="page-rightheader ml-md-auto">
+
+        <div class="d-flex align-items-end flex-wrap my-auto right-content breadcrumb-right">
+
+            <div class="btn-list">
+
+                <a href="#" class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </a>
+
+                <a href="#" class="btn btn-light" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </a>
+
+                <a href="#" class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--End Page header-->
+
+{% if user.is_authenticated %}
+
+<div class="row ">
+
+    <div class="col-xl-3 col-md-12 col-lg-12">
+
+        <div class="card user-pro-list overflow-hidden">
+
+            <div class="card-body">
+
+                <div class="user-pic text-center">
+
+                    <span class="avatar avatar-xxl brround" style="background-image: url({{user.Profile_Pic.url}})">
+
+                        <span class="avatar-status bg-green"></span>
+
+                    </span>
+
+                    <div class="pro-user mt-3">
+
+                        <h5 class="pro-user-username text-dark mb-1 fs-16">{{user.first_name}}</h5>
+
+                        <h6 class="pro-user-desc text-muted fs-12">{{user.email}}</h6>
+
+                        <div class="btn-list">
+
+                            <!--x<a href="#" class="btn btn-light"> <i class="feather feather-edit"></i> </a>-->                            
+
+                            <a href="#" class="btn btn-light"> <i class="fa fa-facebook"></i></a>
+
+                            <a href="#" class="btn btn-light"> <i class="fa fa-twitter"></i></a>
+
+                            <a href="#" class="btn btn-light"> <i class="fa fa-linkedin"></i></a>
+
+                            <a href="#" class="btn btn-light"> <i class="fa fa-instagram"></i></a>
+
+                            <a href="#" class="btn btn-light"> <i class="fa fa-whatsapp"></i></a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-header  border-0">
+
+                <div class="card-title">Basic Info</div>
+
+            </div>
+
+            <div class="card-body pt-0">
+
+                <div class="table-responsive">
+
+                    <table class="table">
+
+                        <tbody>
+
+                            <tr>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="w-50">Employee ID</span>
+
+                                </td>
+
+                                <td>:</td>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="">#{{user.Employee_Id}}</span>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="w-50">Designation</span>
+
+                                </td>
+
+                                <td>:</td>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="">{{user.Designation}}</span>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="w-50">Department</span>
+
+                                </td>
+
+                                <td>:</td>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="">{{user.Department}}</span>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="w-50">Join Date</span>
+
+                                </td>
+
+                                <td>:</td>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="">{{user.Date_Of_Joining}}</span>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="w-50">Phone Number</span>
+
+                                </td>
+
+                                <td>:</td>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="">{{user.Phone}}</span>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="w-50">Status</span>
+
+                                </td>
+
+                                <td>:</td>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="badge badge-success">{{user.is_active}}</span>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-9">
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="card">
+
+                    <div class="card-header border-bottom-0">
+
+                        <h3 class="card-title">Employee Details</h3>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div aria-multiselectable="true" class="accordion" id="accordion" role="tablist">
+
+<!-- EMPLOYEE PROFILE -->                        
+
+                            <div class="acc-card">
+
+                                <div class="acc-header" id="headingOne" role="tab">
+
+                                    <h5 class="mb-0">
+
+                                        <a aria-controls="collapseOne" aria-expanded="true" data-bs-toggle="collapse" href="#collapseOne">Basic Employee</a>
+
+                                    </h5>
+
+                                </div>
+
+                                <div aria-labelledby="headingOne" class="collapse show" data-bs-parent="#accordion" id="collapseOne" role="tabpanel">
+
+                                    <div class="col-xl-12 col-md-12 col-lg-12">
+
+                                        <div class="card">
+
+                                            <div class="card-header  border-0">
+
+                                                <h4 class="card-title">
+
+                                                    <a class="btn btn-primary btn-sm mr-3"  data-bs-effect="effect-fall" data-bs-toggle="modal" data-bs-target="#Employee-Details" data-backdrop="static" data-keyboard="false">Basic Employee</a>
+
+                                                </h4>
+
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <div class="table-responsive">
+
+                                                    <table class="table table-bordered text-nowrap border-bottom my_res_table">
+
+                                                        <thead>
+
+                                                            <tr>
+
+                                                                <th class="border-bottom-0 w-10">User</th>
+
+                                                                <th class="border-bottom-0">DOB</th>
+
+                                                                <th class="border-bottom-0">Blood</th>
+
+                                                                <th class="border-bottom-0">City</th>
+
+                                                                <th class="border-bottom-0">Postal Code</th>
+
+                                                                <th class="border-bottom-0">State</th>
+
+                                                                <th class="border-bottom-0">Country</th>
+
+                                                                <th class="border-bottom-0">Martial</th>
+
+                                                                <th class="border-bottom-0">Religion</th>
+
+                                                                <th class="border-bottom-0">Nationality</th>
+
+                                                                <th class="border-bottom-0">Citizenship</th>
+
+                                                                <th class="border-bottom-0">Address</th>
+
+                                                                <th class="border-bottom-0">Action</th>
+
+                                                            </tr>
+
+                                                        </thead>
+
+                                                        <tbody>
+
+                                                            {% for dt in Employee_Details  %}
+
+                                                            <tr>
+
+                                                                <td>
+
+                                                                    <div class="d-flex">
+
+                                                                        <span class="avatar avatar-md brround mr-3" style="background-image: url({{dt.user.Profile_Pic.url}})"></span>
+
+                                                                        <div class="mr-3 mt-0 mt-sm-1 d-block">
+
+                                                                            <h6 class="mb-1 fs-14">{{dt.user.username}}</h6>
+
+                                                                            <p class="mb-0 fs-12">{{dt.user.email}}</p>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </td>
+
+                                                                <td>{{dt.DOB}}</td>
+
+                                                                <td>{{dt.Blood_Group}}</td>
+
+                                                                <td>{{dt.City}}</td>
+
+                                                                <td>{{dt.Postal_Code}}</td>
+
+                                                                <td>{{dt.State}}</td>
+
+                                                                <td>{{dt.Country}}</td>
+
+                                                                <td>{{dt.Martial_Status}}</td>
+
+                                                                <td>{{dt.Religion}}</td>
+
+                                                                <td>{{dt.Nationality}}</td>
+
+                                                                <td>{{dt.Citizenship}}</td>
+
+                                                                <td>{{dt.Address_1}} {{dt.Address_2}}</td>
+
+                                                                <td class="text-center">
+
+                                                                    <a class="action-btns" title="Edit">
+
+                                                                      <i class="feather feather-edit-3 primary text-success"></i>
+
+                                                                    </a>
+
+                                                                    <a href={% url 'delete-employee-details' dt.id %} onclick="return confirm('Are sure you want to Delete? ')" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+
+                                                                      <i class="feather feather-trash-2 text-danger"></i>
+
+                                                                    </a>
+
+                                                                </td>
+
+                                                            </tr>
+
+                                                            {% endfor %}
+
+                                                        </tbody>
+
+                                                    </table>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+<!-- EMPLOYEE PROFILE  -->
+
+
+
+<!-- EMPLOYEE BANK DETAILS -->
+
+                            <div class="acc-card">
+
+                                <div class="acc-header" id="headingTwo" role="tab">
+
+                                    <h5 class="mb-0">
+
+                                        <a aria-controls="collapseTwo" aria-expanded="false" class="collapsed" data-bs-toggle="collapse" href="#collapseTwo">Bank Details</a>
+
+                                    </h5>
+
+                                </div>
+
+                                <div aria-labelledby="headingTwo" class="collapse" data-bs-parent="#accordion" id="collapseTwo" role="tabpanel">
+
+                                    <div class="col-xl-12 col-md-12 col-lg-12">
+
+                                        <div class="card">
+
+                                            <div class="card-header  border-0">
+
+                                                <h4 class="card-title"><a class="btn btn-primary btn-sm mr-3"  data-bs-effect="effect-fall" data-bs-toggle="modal" data-bs-target="#Bank_Details" data-backdrop="static" data-keyboard="false">Bank Details</a></h4>
+
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <div class="table-responsive">
+
+                                                    <table class="table table-bordered text-nowrap border-bottom my_res_table">
+
+                                                        <thead>
+
+                                                            <tr>
+
+                                                                <th class="border-bottom-0 w-10">User</th>
+
+                                                                <th class="border-bottom-0">Holder Name</th>
+
+                                                                <th class="border-bottom-0">Account No</th>
+
+                                                                <th class="border-bottom-0">Bank Name</th>
+
+                                                                <th class="border-bottom-0">Branch Location</th>
+
+                                                                <th class="border-bottom-0">IFSC</th>
+
+                                                                <th class="border-bottom-0">PAN</th>
+
+                                                                <th class="border-bottom-0">Aadhar</th>
+
+                                                                <th class="border-bottom-0">Action</th>
+
+                                                            </tr>
+
+                                                        </thead>
+
+                                                        <tbody>
+
+                                                            {% for dt in Bank_Details %}
+
+                                                            <tr>
+
+                                                                <td>
+
+                                                                    <div class="d-flex">
+
+                                                                        <span class="avatar avatar-md brround mr-3" style="background-image: url({{dt.user.Profile_Pic.url}})"></span>
+
+                                                                        <div class="mr-3 mt-0 mt-sm-1 d-block">
+
+                                                                            <h6 class="mb-1 fs-14">{{dt.user.username}}</h6>
+
+                                                                            <p class="mb-0 fs-12">{{dt.user.email}}</p>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </td>
+
+                                                                <td>{{dt.first_name}} {{dt.Holder_Name}}</td>
+
+                                                                <td>{{dt.Account_No}}</td>
+
+                                                                <td>{{dt.Bank_Name}}</td>
+
+                                                                <td><span class="feather feather-men text-success"></span>{{dt.Branch_Location}}</td>
+
+                                                                <td><span class="feather feather-men text-success"></span>{{dt.IFSC}}</td>
+
+                                                                <td><span class="feather feather-men text-success"></span>{{dt.PAN}}</td>
+
+                                                                <td><span class="feather feather-men text-success"></span>{{dt.Aadhar}}</td>
+
+                                                                <td class="text-center">
+
+                                                                    <a class="action-btns" data-bs-effect="effect-fall" data-bs-toggle="modal" data-bs-target="#edit-bank-details{{dt.id}}" data-backdrop="static" data-keyboard="false" title="Edit">
+
+                                                                        <i class="feather feather-edit-3 primary text-success"></i>
+
+                                                                    </a>
+
+                                                                    <a href="{% url 'delete-bank-details' dt.id %}" onclick="return confirm('Are sure you want to Delete? ')" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+
+                                                                      <i class="feather feather-trash-2 text-danger"></i>
+
+                                                                    </a>
+
+                                                                </td>
+
+                                                            </tr>
+
+                                                            {% include '_partials/_employee/_view-bank-details.html' %}
+
+                                                            {% endfor %}
+
+                                                        </tbody>
+
+                                                    </table>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+<!-- END EMPLOYEE BANK DETAILS -->  
+
+<!-- EMPLOYEE DOCUMENTS -->
+
+                            <div class="acc-card">
+
+                                <div class="acc-header" id="headingThree" role="tab">
+
+                                    <h5 class="mb-0">
+
+                                        <a aria-controls="collapseThree" aria-expanded="false" class="collapsed" data-bs-toggle="collapse" href="#collapseThree">Employee Documents</a>
+
+                                    </h5>
+
+                                </div>
+
+                                <div aria-labelledby="headingThree" class="collapse" data-bs-parent="#accordion" id="collapseThree" role="tabpanel">
+
+                                    <div class="col-xl-12 col-md-12 col-lg-12">
+
+                                        <div class="card">
+
+                                            <div class="card-header  border-0">
+
+                                                <h4 class="card-title"><a class="btn btn-primary btn-sm mr-3"  data-bs-effect="effect-fall" data-bs-toggle="modal" data-bs-target="#employee_documents" data-backdrop="static" data-keyboard="false">Employee Documents</a></h4>
+
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <div class="table-responsive">
+
+                                                    <table class="table table-vcenter text-nowrap table-bordered border-bottom  details-datatable">
+
+                                                        <thead>
+
+                                                            <tr>
+
+                                                                <th class="border-bottom-0 w-10">User</th>
+
+                                                                <th class="border-bottom-0">Document Name</th>
+
+                                                                <th class="border-bottom-0">File</th>
+
+                                                                <th class="border-bottom-0">Action</th>
+
+                                                            </tr>
+
+                                                        </thead>
+
+                                                        <tbody>
+
+                                                            {% for dt in Employee_Documents %}
+
+                                                            <tr>
+
+                                                                <td>
+
+                                                                    <div class="d-flex">
+
+                                                                        <span class="avatar avatar-md brround mr-3" style="background-image: url({{dt.user.Profile_Pic.url}})"></span>
+
+                                                                        <div class="mr-3 mt-0 mt-sm-1 d-block">
+
+                                                                            <h6 class="mb-1 fs-14">{{dt.user.username}}</h6>
+
+                                                                            <p class="mb-0 fs-12">{{dt.user.email}}</p>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </td>
+
+                                                                <td>{{dt.Document_Name}}</td>
+
+                                                                <td>
+
+                                                                    <a href="{{dt.Document_File.url}}" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="view" target="_blank">
+
+                                                                        <i class="fa fa-file-pdf-o text-danger"></i>
+
+                                                                    </a>
+
+                                                                </td>
+
+                                                                <td class="text-center">
+
+                                                                    <a href={% url 'delete-employee-documents' dt.id %} onclick="return confirm('Are sure you want to Delete? ')" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+
+                                                                      <i class="feather feather-trash-2 text-danger"></i>
+
+                                                                    </a>
+
+                                                                </td>
+
+                                                            </tr>
+
+                                                            {% endfor %}
+
+                                                        </tbody>
+
+                                                    </table>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+<!-- END EMPLOYEE DOCUMENTS -->   
+
+
+
+<!-- EMERGENCY CONTACT -->
+
+                            <div class="acc-card">
+
+                                <div class="acc-header" id="headingFour" role="tab">
+
+                                    <h5 class="mb-0">
+
+                                        <a aria-controls="collapseFour" aria-expanded="false" class="collapsed" data-bs-toggle="collapse" href="#collapseFour">Emergincy Contact</a>
+
+                                    </h5>
+
+                                </div>
+
+                                <div aria-labelledby="headingFour" class="collapse" data-bs-parent="#accordion" id="collapseFour" role="tabpanel">
+
+                                    <div class="col-xl-12 col-md-12 col-lg-12">
+
+                                        <div class="card">
+
+                                            <div class="card-header  border-0">
+
+                                                <h4 class="card-title"><a class="btn btn-primary btn-sm mr-3"  data-bs-effect="effect-fall" data-bs-toggle="modal" data-bs-target="#Emergency_Model" data-backdrop="static" data-keyboard="false">Emergency Contact</a></h4>
+
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <div class="table-responsive">
+
+                                                    <table class="table table-bordered text-nowrap border-bottom my_res_table">
+
+                                                        <thead>
+
+                                                            <tr>
+
+                                                                <th class="border-bottom-0 w-10">User</th>
+
+                                                                <th class="border-bottom-0">Emergency Name</th>
+
+                                                                <th class="border-bottom-0">Relationship</th>
+
+                                                                <th class="border-bottom-0">Emergency Phone</th>
+
+                                                                <th class="border-bottom-0">Emergency Email</th>
+
+                                                                <th class="border-bottom-0">Emergency Address</th>
+
+                                                                <th class="border-bottom-0">Action</th>
+
+                                                            </tr>
+
+                                                        </thead>
+
+                                                        <tbody>
+
+                                                            {% for dt in Emergency_Contact  %}
+
+                                                            <tr>
+
+                                                                <td>
+
+                                                                    <div class="d-flex">
+
+                                                                        <span class="avatar avatar-md brround mr-3" style="background-image: url({{dt.user.Profile_Pic.url}})"></span>
+
+                                                                        <div class="mr-3 mt-0 mt-sm-1 d-block">
+
+                                                                            <h6 class="mb-1 fs-14">{{dt.user.username}}</h6>
+
+                                                                            <p class="mb-0 fs-12">{{dt.user.email}}</p>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </td>
+
+                                                                <td>{{dt.Emergency_Name}}</td>
+
+                                                                <td>{{dt.Relationship}}</td>
+
+                                                                <td>{{dt.Emergency_Phone}}</td>
+
+                                                                <td>{{dt.Emergency_Email}}</td>
+
+                                                                <td>{{dt.Emergency_Address}}</td>
+
+                                                                <td class="text-center">
+
+                                                                    <a href={% url 'delete-emergency-contact' dt.id %} onclick="return confirm('Are sure you want to Delete? ')"  class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+
+                                                                      <i class="feather feather-trash-2 text-danger"></i>
+
+                                                                    </a>
+
+                                                                </td>
+
+                                                            </tr>
+
+                                                            {% endfor %}
+
+                                                        </tbody>
+
+                                                    </table>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div><!-- collapse -->
+
+                            </div>
+
+<!-- END EMERGENCY CONTACT -->
+
+
+
+<!-- EMPLOYEE SOCILA MEDIA -->
+
+                            <div class="acc-card">
+
+                                <div class="acc-header" id="headingFive" role="tab">
+
+                                    <h5 class="mb-0">
+
+                                        <a aria-controls="collapseFive" aria-expanded="false" class="collapsed" data-bs-toggle="collapse" href="#collapseFive">Social Media</a>
+
+                                    </h5>
+
+                                </div>
+
+                                <div aria-labelledby="headingFive" class="collapse" data-bs-parent="#accordion" id="collapseFive" role="tabpanel">
+
+                                    <div class="col-xl-12 col-md-12 col-lg-12">
+
+                                        <div class="card">
+
+                                            <div class="card-header  border-0">
+
+                                                <h4 class="card-title">
+
+                                                    <a class="btn btn-primary btn-sm mr-3"  data-bs-effect="effect-fall" data-bs-toggle="modal" data-bs-target="#social_media" data-backdrop="static" data-keyboard="false">Social Media</a>
+
+                                                </h4>
+
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <div class="table-responsive">
+
+                                                    <table class="table table-bordered text-nowrap border-bottom my_res_table">
+
+                                                        <thead>
+
+                                                            <tr>
+
+                                                                <th class="border-bottom-0 w-10">User</th>
+
+                                                                <th class="border-bottom-0">Social Media Name</th>
+
+                                                                <th class="border-bottom-0">Social Link</th>
+
+                                                                <th class="border-bottom-0">Action</th>
+
+                                                            </tr>
+
+                                                        </thead>
+
+                                                        <tbody>
+
+                                                            {% for dt in Social %}
+
+                                                            <tr>
+
+                                                                <td>
+
+                                                                    <div class="d-flex">
+
+                                                                        <span class="avatar avatar-md brround mr-3" style="background-image: url({{dt.user.Profile_Pic.url}})"></span>
+
+                                                                        <div class="mr-3 mt-0 mt-sm-1 d-block">
+
+                                                                            <h6 class="mb-1 fs-14">{{dt.user.username}}</h6>
+
+                                                                            <p class="mb-0 fs-12">{{dt.user.email}}</p>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </td>
+
+                                                                <td>{{dt.Name}}</td>
+
+                                                                <td>
+
+                                                                    <a href="{{dt.Profile_Url}}" target="_blank">
+
+                                                                        <b>{{dt.Name}}</b>
+
+                                                                    </a>
+
+                                                                </td>
+
+                                                                <td class="text-center">
+
+                                                                    <a href="{% url 'delete-social-media' dt.id %}" onclick="return confirm('Are sure you want to Delete? ')" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+
+                                                                      <i class="feather feather-trash-2 text-danger"></i>
+
+                                                                    </a>
+
+                                                                </td>
+
+                                                            </tr>
+
+                                                            
+
+                                                            {% endfor %}
+
+                                                        </tbody>
+
+                                                    </table>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div><!-- collapse -->
+
+                            </div>
+
+<!-- END EMPLOYEE SOCIAL MEDIA -->  
+
+                        </div><!-- accordion -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--End Row-->
+
+    </div>
+
+</div>
+
+{% endif %}
+
+<!--/Row-->
+
+{% include '_partials/_employee/_basic-employee.html' %}
+
+{% include '_partials/_employee/_bank-details.html' %}
+
+{% include '_partials/_employee/_emp-documents.html' %}
+
+{% include '_partials/_employee/_emergency.html' %}
+
+{% include '_partials/_employee/_social-media.html' %}
+
+
+
+{% endblock %}

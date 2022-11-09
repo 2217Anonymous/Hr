@@ -1,0 +1,25 @@
+<div class="modal fade"  id="attendance-remark{{dt.id}}"  data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Attendance Remark</h6><button aria-label="Close" class="close" data-bs-dismiss="modal" ><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form action="/master/dept-edit/" method="POST">
+                    {% csrf_token %}
+                  <input type="hidden" value="{{dt.id}}" name="id"/>
+                  <label class="form-label">Attendance Remark</label>
+                  <div class="wd-150 mg-b-30">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div><!-- input-group-prepend -->
+                      <textarea class="form-control mb-4" value="{{dt.Description}}" name="Description" placeholder="Textarea" rows="3"></textarea>                     </div>
+                  </div><!-- wd-150 -->   
+                  <br>  
+                 <button type="submit" name="submit" class="btn btn-success">Save Changes</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+{% extends '../_partials/_admin_base.html' %}
+{% block title %} Group {% endblock title %} 
+{% load static %}
+{% block content %}
+<!--Page header-->
+<div class="page-header d-xl-flex d-block">
+  <div class="page-leftheader">
+    <h4 class="page-title"> Group <span class="font-weight-normal text-muted ml-2">Permission</span></h4>
+  </div>
+</div>
+<!--End Page header-->
+
+<!--Row-->
+<div class="row">
+  <div class="col-lg-5">
+    <div class="card">
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title">Group Permission</h3>
+      </div>
+      <div class="card-body">
+        <form action="{% url 'add-group-perms' name=name %}" method="POST">
+            {% csrf_token %}
+            <label class="form-label">Permissions <span class="text-red">*</span> </label>
+            <div class="wd-150 mg-b-30">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                </div><!-- input-group-prepend -->
+                <select class="multi-select" multiple="multiple" required name="pname" data-placeholder="Choose one">
+                  <option label="Choose one"></option>
+                  {% for data in allperms %}
+                    <option value="{{data.name}}">{{ data.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div><!-- wd-150 -->   
+          <br>  
+      </div>
+        <div class="card-footer">
+          <button type="submit" name="submit" class="btn btn-success">Add Group</button>
+          <button type="reset" class="btn btn-danger">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <div class="card">
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title">Group Permission List</h3>
+      </div>
+      <div class=" card-body">
+        <div class="table-responsive attendance_table mt-4 border-top">
+          <table class="mb-0 table table-bordered text-nowrap border-bottom my-datatable">
+            <thead>
+              <tr>
+                {% comment %} <th class="wd-15p border-bottom-0">Id</th> {% endcomment %}
+                <th class="wd-15p border-bottom-0">Group Name</th>
+                <th class="wd-15p border-bottom-0">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for dt in perms %}
+                <tr class="border-bottom">
+                  <td class="font-weight-semibold fs-14">{{dt.name}}</td>
+                  <td class="text-center">
+                    <a href={% url 'del-group-perms' gname=name name=dt.name %} onclick="return confirm('Are sure you want to Delete? ')" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                      <i class="feather feather-trash-2 text-danger"></i>
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

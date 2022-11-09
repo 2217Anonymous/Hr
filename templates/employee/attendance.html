@@ -1,0 +1,459 @@
+{% extends '../_partials/_admin_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!--Page header-->
+
+<div class="page-header d-xl-flex d-block">
+
+    <div class="page-leftheader">
+
+        <h4 class="page-title">Attendance {{dt_check}}
+            
+        </h4>
+
+    </div>
+
+    <div class="page-rightheader ml-md-auto">
+
+        <div class="d-flex align-items-end flex-wrap my-auto right-content breadcrumb-right">
+
+            {% comment %} <div class="d-flex">
+
+                <div class="header-datepicker mr-3">
+
+                    <div class="input-group">
+
+                        <div class="input-group-prepend">
+
+                            <div class="input-group-text">
+
+                                <i class="feather feather-calendar"></i>
+
+                            </div>
+
+                        </div><input class="form-control fc-datepicker"  type="text">
+
+                    </div>
+
+                </div>
+
+            </div> {% endcomment %} 
+
+            <div class="d-lg-flex">
+
+                <div class="btn-list">
+
+                    <a href="{% url 'manual-attendance' %}" class="btn btn-primary mr-4">Manual Attendance</a>
+
+                    <button  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </button>
+
+                    <button  class="btn btn-light" data-placement="top" data-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </button>
+
+                    <button  class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--End Page header-->
+
+
+
+<!-- Row -->
+
+<div class="row">
+
+    <div class="col-xl-6 col-md-12 col-lg-12">
+        <form action="{% if check %}{% url 'Out' %}{% else %}{% url 'In' %}{% endif %}" method="POST">
+            {% csrf_token %}
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="d-flex">
+
+                        <div class="header-datepicker mr-3">
+        
+                            <div class="input-group">
+        
+                                <div class="input-group-prepend">
+        
+                                    <div class="input-group-text">
+        
+                                        <i class="feather feather-calendar"></i>
+        
+                                    </div>
+        
+                                </div><input class="form-control fc-datepicker"  type="text">
+        
+                            </div>
+        
+                        </div>
+                    </div>
+
+                    <div class="countdowntimer mt-0">
+
+                        <label id="clocktimer" name="In_Time" class="border-0"></label>
+
+                        <label class="form-label">Current Time</label>
+
+                    </div>
+
+                    <div class="btn-list text-center mt-5">
+                        <input type="hidden" class="form-control" value="{{request.user.id}}" name="user" id="user" />
+                        <input type="hidden" name="latitude" value="" class="form-control latitude" />
+                        <input type="hidden" name="longitude" value="" class="form-control longitude" />
+                            {% if check %}
+                                <button href="{% url 'Out' %}" class="btn ripple btn-danger">Clock Out </button>
+                            {% else %}
+                                <button href="{% url 'In' %}" class="btn ripple btn-success">Clock In</button>
+                            {% endif %}                        
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="col-xl-6 col-md-12 col-lg-12">
+
+        <div class="card">
+
+            <div class="card-header  border-0">
+
+                <h4 class="card-title">Days Overview This Month</h4>
+
+            </div>
+
+            <div class="card-body pt-0 pb-3">
+
+                <div class="row mb-0 pb-0">
+
+                    <div class="col-md-6 col-xl-4 text-center py-5">
+
+                        <span class="avatar avatar-md bradius fs-20 bg-primary-transparent">31</span>
+
+                        <h5 class="mb-0 mt-3">Total Working Days</h5>
+
+                    </div>
+
+                    <div class="col-md-6 col-xl-4 text-center py-5 ">
+
+                        <span class="avatar avatar-md bradius fs-20 bg-success-transparent">24</span>
+
+                        <h5 class="mb-0 mt-3">Present Days</h5>
+
+                    </div>
+
+                    <div class="col-md-6 col-xl-4 text-center py-5">
+
+                        <span class="avatar avatar-md bradius fs-20 bg-danger-transparent">2</span>
+
+                        <h5 class="mb-0 mt-3">Absent Days</h5>
+
+                    </div>
+
+                    <div class="col-md-6 col-xl-4 text-center py-5">
+
+                        <span class="avatar avatar-md bradius fs-20 bg-warning-transparent">0</span>
+
+                        <h5 class="mb-0 mt-3">Half Days</h5>
+
+                    </div>
+
+                    <div class="col-md-6 col-xl-4 text-center py-5 ">
+
+                        <span class="avatar avatar-md bradius fs-20 bg-orange-transparent">2</span>
+
+                        <h5 class="mb-0 mt-3">Late Days</h5>
+
+                    </div>
+
+                    <div class="col-md-6 col-xl-4 text-center py-5">
+
+                        <span class="avatar avatar-md bradius fs-20 bg-pink-transparent">5</span>
+
+                        <h5 class="mb-0 mt-3">Holidays</h5>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- End Row-->
+
+<!-- Row -->
+
+<div class="row">
+
+    <div class="col-xl-12 col-md-12 col-lg-12">
+
+        <div class="card">
+
+            <div class="card-header  border-0">
+
+                <h4 class="card-title">Attendance Overview</h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-md-12 col-lg-6 col-xl-6">
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+
+                                    <label class="form-label">From:</label>
+
+                                    <div class="input-group">
+
+                                        <div class="input-group-prepend">
+
+                                            <div class="input-group-text">
+
+                                                <i class="feather feather-calendar"></i>
+
+                                            </div>
+
+                                        </div><input class="form-control fc-datepicker" placeholder="19 Feb 2020" type="text">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+
+                                    <label class="form-label">To:</label>
+
+                                    <div class="input-group">
+
+                                        <div class="input-group-prepend">
+
+                                            <div class="input-group-text">
+
+                                                <i class="feather feather-calendar"></i>
+
+                                            </div>
+
+                                        </div><input class="form-control fc-datepicker" placeholder="19 Feb 2020" type="text">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 col-xl-2">
+
+                        <div class="form-group">
+
+                            <label class="form-label">Month:</label>
+
+                            <select name="attendance"  class="form-control custom-select select2" data-placeholder="Select Month">
+
+                                <option label="Select Month"></option>
+
+                                <option value="1">January</option>
+
+                                <option value="2">February</option>
+
+                                <option value="3">March</option>
+
+                                <option value="4">April</option>
+
+                                <option value="5">May</option>
+
+                                <option value="6">June</option>
+
+                                <option value="7">July</option>
+
+                                <option value="8">August</option>
+
+                                <option value="9">September</option>
+
+                                <option value="10">October</option>
+
+                                <option value="11">November</option>
+
+                                <option value="12">December</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 col-xl-2">
+
+                        <div class="form-group">
+
+                            <label class="form-label">Year:</label>
+
+                            <select name="attendance"  class="form-control custom-select select2" data-placeholder="Select Year">
+
+                                <option label="Select Year"></option>
+
+                                <option value="1">2024</option>
+
+                                <option value="2">2023</option>
+
+                                <option value="3">2022</option>
+
+                                <option value="4">2021</option>
+
+                                <option value="5">2020</option>
+
+                                <option value="6">2019</option>
+
+                                <option value="7">2018</option>
+
+                                <option value="8">2017</option>
+
+                                <option value="9">2016</option>
+
+                                <option value="10">2015</option>
+
+                                <option value="11">2014</option>
+
+                                <option value="12">2013</option>
+
+                                <option value="13">2012</option>
+
+                                <option value="14">2011</option>
+
+                                <option value="15">2019</option>
+
+                                <option value="16">2010</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 col-xl-2">
+
+                        <div class="form-group mt-5">
+
+                            <a href="#" class="btn btn-primary btn-block">Search</a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered text-nowrap border-bottom my_res_table">
+                        <thead>
+
+                            <tr>
+                                <th class="border-bottom-0 text-center">User Name</th>
+                                <th class="border-bottom-0">Date</th>
+                                <th class="border-bottom-0">In Time</th>
+                                <th class="border-bottom-0">Out Time</th>
+                                <th class="border-bottom-0">Statuc</th>
+                                <th class="border-bottom-0">Progress</th>
+                                <th class="border-bottom-0">Late</th>
+                                <th class="border-bottom-0">Early_Leaving</th>
+                                <th class="border-bottom-0">Total_Working_Hours</th>
+                                <th class="border-bottom-0">Over_Time</th>
+                                <th class="border-bottom-0">Location</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+                            {% for my in my_attendance %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex">
+                                        <span class="avatar avatar-md brround mr-3" style="background-image: url({{my.user.Profile_Pic.url}})"></span>
+                                        <div class="mr-3 mt-0 mt-sm-1 d-block">
+                                            <h6 class="mb-1 fs-14">{{my.user.username}}</h6>
+                                            <p class="mb-0 fs-12">{{my.user.email}}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{my.Date}}</td>
+
+                                <td><span class="badge badge-success">{{my.In_Time}}</span></td>
+
+                                <td><span class="badge badge-danger">{{my.Out_Time}}</span></td>
+
+                                <td>{{my.Status}}</td>
+
+                                <td>
+                                    <div class="progress progress-sm d-block">
+                                        <div class="progress-bar bg-success w-100"></div>
+                                    </div>
+                                </td>
+
+                                <td>{{my.Late_Time|time:"H :i"}}</td>
+                                <td>{{my.Early_Leaving|time:"H :i"}}</td>
+                                <td>{{my.Total_Working_Hours|time:"H :i"}}</td>
+                                <td>{{my.Over_Time|time:"H :i"}}</td>
+                                <td>
+                                    <a class="modal-effect text-primary mb-3" data-effect="effect-super-scaled" data-toggle="modal" href="#map-model{{my.id}}">
+                                        <i class="feather feather-map-pin sidemenu_icon"></i>
+                                    </a>
+                                </td>
+                                
+                            </tr>
+                            {% include '../_partials/_map.html' %}
+                            {% endfor %}
+                            
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- End Row-->
+
+{% endblock %}

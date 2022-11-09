@@ -1,0 +1,120 @@
+{% extends '../_partials/_admin_base.html' %}
+{% block title %} My Leaves {% endblock title %} 
+{% load static %}
+{% block content %}
+<div class="page-header d-xl-flex d-block">
+    <div class="page-leftheader">
+        <h4 class="page-title">Leave <span class="font-weight-normal text-muted ml-2">Request</span></h4>
+    </div>
+    <div class="page-rightheader ml-md-auto">
+        <div class="align-items-end flex-wrap my-auto right-content breadcrumb-right">
+            <div class="btn-list">
+                <a href="#" class="btn btn-primary mr-3" data-bs-toggle="modal" data-bs-target="#applyleaves">Apply Leaves</a>
+                <button  class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </button>
+                <button  class="btn btn-light" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </button>
+                <button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </button>
+            </div>
+            {% include '../_partials/_employee/_apply-leave.html' %}
+        </div>
+    </div>
+</div>
+<!--End Page header-->
+
+<!-- Row -->
+<div class="row">
+    <div class="col-xl-9 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-header  border-0">
+                <h4 class="card-title">Leaves Summary</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-nowrap border-bottom my_res_table">
+                        <thead>
+                            <tr>
+                                <th class="border-bottom-0 text-center">User Name</th>
+                                <th class="border-bottom-0">Leave Type</th>
+                                <th class="border-bottom-0">From</th>
+                                <th class="border-bottom-0">TO</th>
+                                <th class="border-bottom-0">Days</th>
+                                <th class="border-bottom-0">Reason</th>
+                                <th class="border-bottom-0">Applied On</th>
+                                <th class="border-bottom-0">Status</th>
+                                <th class="border-bottom-0">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dt in leave_data  %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex">
+                                        <span class="avatar avatar-md brround mr-3" style="background-image: url({{dt.user.Profile_Pic.url}})"></span>
+                                        <div class="mr-3 mt-0 mt-sm-1 d-block">
+                                            <h6 class="mb-1 fs-14">{{dt.user.username}}</h6>
+                                            <p class="mb-0 fs-12">{{dt.user.email}}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{dt.Leave_Type}}</td>
+                                <td>{{dt.Start_Date}}</td>
+                                <td>{{dt.End_Date}}</td>
+                                <td class="font-weight-semibold">{{dt.leave_days}}</td>
+                                <td>{{dt.Reason}}</td>
+                                <td>{{dt.created_at}}</td>
+                                <td>
+                                    {% if dt.Approved_Status == "Pending" %}
+                                        <span class="badge badge-warning">{{dt.Approved_Status}}</span>
+                                        {% elif dt.is_approved %}
+                                        <span class="badge badge-success">{{dt.Approved_Status}}</span>
+                                        {% elif not dt.is_approved%}
+                                        <span class="badge badge-danger">{{dt.Approved_Status}}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{dt.Approved_Description}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-header  border-0">
+                <h4 class="card-title">Leaves Overview</h4>
+            </div>
+            <div class="card-body">
+                <div id="leavesoverview" class="mx-auto pt-2"></div>
+                <div class="row pt-7 pb-5  mx-auto text-center">
+                    <div class="col-md-7 mx-auto d-block">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="d-flex font-weight-semibold">
+                                    <span class="dot-label bg-primary mr-2 my-auto"></span>Casual Leaves
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <div class="d-flex font-weight-semibold">
+                                    <span class="dot-label badge-danger mr-2 my-auto"></span>Sick Leaves
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <div class="d-flex font-weight-semibold">
+                                    <span class="dot-label bg-secondary mr-2 my-auto"></span>Gifted Leaves
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <div class="d-flex font-weight-semibold">
+                                    <span class="dot-label bg-success mr-2 my-auto"></span>Remaining Leaves
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Row-->
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends './_leave.html' %}
+
+{% block modelId %}id="leave-edit{{leave.id}}"{% endblock modelId %}
+
+{% block blockTitle %}Leave{% endblock blockTitle %}
+
+{% block blockAction %}action="{% url 'leave-edit' %}"{% endblock blockAction %}
+
+{% block valueId %}
+    <input type="hidden" value="{{leave.id}}" name="id"/>
+{% endblock valueId %}
+
+{% block valueLeave %}value="{{leave.Leave}}"{% endblock valueLeave %}
+{% block valueDays %}value="{{leave.Days}}"{% endblock valueDays %}

@@ -1,0 +1,319 @@
+{% load static %}
+{% extends '../_partials/_admin_base.html' %}
+
+{% block content %}
+<!--Page header-->
+<div class="page-header d-xl-flex d-block">
+    <div class="page-leftheader">
+        <h4 class="page-title">Attendance <span class="font-weight-normal text-muted ml-2">List</span></h4>
+    </div>
+    {% comment %} {{att_list.Date|date:"M d, Y"}} {% endcomment %}
+    <div class="page-rightheader ml-md-auto">
+        <div class="d-flex align-items-end flex-wrap my-auto right-content breadcrumb-right">
+            <div class="btn-list">
+                <a href="#" class="btn btn-primary mr-3">Mark Attendance</a>
+                <button  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </button>
+                <button  class="btn btn-light" data-placement="top" data-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </button>
+                <button  class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Page header-->
+
+<!-- Row -->
+<div class="row">
+    <div class="col-xl-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mt-5">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="form-label">Department</label>
+                            <select class="form-control custom-select select2" data-placeholder="Select Employee">
+                                <option label="Select Employee"></option>
+                                <option value="1">Faith Harris</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="form-label">Employee Name:</label>
+                            <select class="form-control custom-select select2" data-placeholder="Select Employee">
+                                <option label="Select Employee"></option>
+                                <option value="1">Faith Harris</option>
+                                <option value="2">Austin Bell</option>
+                                <option value="3">Maria Bower</option>
+                                <option value="4">Peter Hill</option>
+                                <option value="5">Victoria Lyman</option>
+                                <option value="6">Adam Quinn</option>
+                                <option value="7">Melanie Coleman</option>
+                                <option value="8">Max Wilson</option>
+                                <option value="9">Amelia Russell</option>
+                                <option value="10">Justin Metcalfe</option>
+                                <option value="11">Ryan Young</option>
+                                <option value="12">Jennifer Hardacre</option>
+                                <option value="13">Justin Parr</option>
+                                <option value="14">Julia Hodges</option>
+                                <option value="15">Michael Sutherland</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-2">
+                        <div class="form-group">
+                            <label class="form-label">Month:</label>
+                            <select class="form-control custom-select select2" data-placeholder="Select Month">
+                                <option label="Select Month"></option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-2">
+                        <div class="form-group">
+                            <label class="form-label">Year:</label>
+                            <select class="form-control custom-select select2" data-placeholder="Select Year">
+                                <option label="Select Year"></option>
+                                <option value="1">2024</option>
+                                <option value="2">2023</option>
+                                <option value="3">2022</option>
+                                <option value="4">2021</option>
+                                <option value="5">2020</option>
+                                <option value="6">2019</option>
+                                <option value="7">2018</option>
+                                <option value="8">2017</option>
+                                <option value="9">2016</option>
+                                <option value="10">2015</option>
+                                <option value="11">2014</option>
+                                <option value="12">2013</option>
+                                <option value="13">2012</option>
+                                <option value="14">2011</option>
+                                <option value="15">2019</option>
+                                <option value="16">2010</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-1">
+                        <div class="form-group mt-5">
+                            <a href="#" class="btn btn-success btn-block"><i class="feather feather-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="d-flex mb-6 mt-5">
+                    <div class="mr-3">
+                        <label class="form-label">Note:</label>
+                    </div>
+                    <div>
+                        <span class="badge badge-success-light mr-2"><i class="feather feather-check-circle text-success"></i> ---> Present</span>
+                        <span class="badge badge-danger-light mr-2"><i class="feather feather-x-circle text-danger"></i> ---> Absent</span>
+                        <span class="badge badge-warning-light mr-2"><i class="fa fa-star text-warning"></i> ---> Holiday</span>
+                        <span class="badge badge-orange-light mr-2"><i class="fa fa-adjust text-orange"></i>  ---> Half Day</span>
+                    </div>
+                </div>
+                <div class="table-responsive hr-attlist">
+                    <table class="table  table-vcenter text-nowrap table-bordered border-bottom" id="hr-attendance">
+                        <thead>
+                            <tr>
+                                <th class="border-bottom-0">Employee Name</th>
+                                
+                                {% for i in daycount  %}
+                                    <th class="border-bottom-0 w-5">{{i}}</th>
+                                {% endfor %}
+                                <th class="border-bottom-0">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for att in att_list %}
+                            {% comment %} {{att_list.getdate}} {% endcomment %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex">
+                                        <span class="avatar avatar-md brround mr-3" style="background-image: url({{att.user.Profile_Pic.url}})"></span>
+                                        <div class="mr-3 mt-0 mt-sm-1 d-block">
+                                            <h6 class="mb-1 fs-14">{{att.user.username}}</h6>
+                                            <p class="mb-0 fs-12">{{att.user.email}}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                {% for i in daycount  %}
+                                    <td id="{{i}}">
+                                        <div class="hr-listd">
+                                            <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                            {% comment %} {% with date = att.Date | date:"d" %} {% endcomment %}
+                                            {% if date == i %}
+                                                <span class="feather feather-check-circle text-success "></span>
+                                            {% else %}
+                                                <span class="feather feather-check-circle text-danger "></span>
+                                            {% endif %} 
+                                        </div>
+                                    </td>
+                                {% endfor %}
+
+                                <td>
+                                    <h6 class="mb-0">
+                                        <span class="text-primary">21</span>
+                                        <span class="my-auto fs-8 font-weight-normal text-muted">/</span>
+                                        <span class="">{{total_days}}</span>
+                                    </h6>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                                {% comment %} <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td><span class="fa fa-star text-warning " data-toggle="tooltip" data-placement="top" title="Sunday"></span></td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#halfpresentmodal" class="hr-listmodal"></a>
+                                        <span class="fa fa-adjust text-orange "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td><span class="fa fa-star text-warning " data-toggle="tooltip" data-placement="top" title="Sunday"></span></td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td><span class="feather feather-x-circle text-danger "></span></td>
+                                <td><span class="feather feather-x-circle text-danger "></span></td>
+                                <td><span class="feather feather-x-circle text-danger "></span></td>
+                                <td><span class="feather feather-x-circle text-danger "></span></td>
+                                <td><span class="fa fa-star text-warning " data-toggle="tooltip" data-placement="top" title="Sunday"></span></td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td><span class="fa fa-star text-warning " data-toggle="tooltip" data-placement="top" title="Sunday"></span></td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td><span class="fa fa-star text-warning" data-toggle="tooltip" data-placement="top" title="Republic Day"></span></td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hr-listd">
+                                        <a href="#" data-toggle="modal" data-target="#presentmodal" class="hr-listmodal"></a>
+                                        <span class="feather feather-check-circle text-success "></span>
+                                    </div>
+                                </td> {% endcomment %}
+                                
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Row-->
+
+{% endblock %}

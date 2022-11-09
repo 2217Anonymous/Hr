@@ -1,0 +1,559 @@
+{% extends './employee-register.html' %}
+{% load static %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+        var $Department=$("#Department");
+        var $Designation=$("#Designation");
+        var $options=$Designation.find('option')
+            $Department.on('change', function(){
+              $Designation.html($options.filter('[value="'+this.value+'"]'));
+            }).trigger('change');
+  });
+</script>
+<!--Page header-->
+<div class="page-header d-xl-flex d-block">
+    <div class="page-leftheader">
+        <h4 class="page-title">Update <span class="font-weight-normal text-muted ml-2">Employee Details</span></h4>
+    </div>
+    <div class="page-rightheader ml-md-auto">
+        <div class="d-flex align-items-end flex-wrap my-auto right-content breadcrumb-right">
+            <div class="btn-list">
+                <a href="#" class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </a>
+                <a href="#" class="btn btn-light" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </a>
+                <a href="#" class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Page header-->
+{% for emp in data %}
+<div class="row ">
+    <div class="col-xl-3 col-md-12 col-lg-12">
+        <div class="card user-pro-list overflow-hidden">
+            <div class="card-body">
+                <div class="user-pic text-center">
+                    <span class="avatar avatar-xxl brround" style="background-image: url({{emp.Profile_Pic.url}})">
+                        
+                    </span>
+                    <div class="pro-user mt-3">
+                        <h5 class="pro-user-username text-dark mb-1 fs-16">{{emp.first_name}}</h5>
+                        <h6 class="pro-user-desc text-muted fs-12">{{emp.email}}</h6>
+                        <div class="btn-list">
+                            <!--x<a href="#" class="btn btn-light"> <i class="feather feather-edit"></i> </a>-->                            
+                            <a href="#" class="btn btn-light"> <i class="fa fa-facebook"></i></a>
+                            <a href="#" class="btn btn-light"> <i class="fa fa-twitter"></i></a>
+                            <a href="#" class="btn btn-light"> <i class="fa fa-linkedin"></i></a>
+                            <a href="#" class="btn btn-light"> <i class="fa fa-whatsapp"></i></a>
+                            <br/>
+                            <a class="btn btn-light" data-bs-toggle="modal" data-bs-target="#edit-profile{{emp.id}}{{emp.auth_token}}{{emp.first_name}}" data-bs-backdrop="static" data-bs-keyboard="false" title="Profile"> Change Profile</i></a>
+                            {% include '../_partials/_auth/_change_profile.html' %}
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header  border-0">
+                <div class="card-title">Basic Info</div>
+            </div>
+
+            <div class="card-body pt-0">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-0">
+                                    <span class="w-50">Employee ID</span>
+                                </td>
+                                <td>:</td>
+                                <td class="py-2 px-0">
+                                    <span class="">#{{emp.Employee_Id}}</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="w-50">Designation</span>
+
+                                </td>
+
+                                <td>:</td>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="">{{emp.Designation}}</span>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="w-50">Department</span>
+
+                                </td>
+
+                                <td>:</td>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="">{{emp.Department}}</span>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="w-50">Join Date</span>
+
+                                </td>
+
+                                <td>:</td>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="">{{emp.Date_Of_Joining}}</span>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="w-50">Phone Number</span>
+
+                                </td>
+
+                                <td>:</td>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="">{{emp.Phone}}</span>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="w-50">Status</span>
+
+                                </td>
+
+                                <td>:</td>
+
+                                <td class="py-2 px-0">
+
+                                    <span class="badge badge-success">{{emp.is_active}}</span>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-9">
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="card">
+
+                    <div class="card-header border-bottom-0">
+
+                        <h3 class="card-title">Update Employee Details</h3>
+
+                    </div>
+                    
+                    <div class="card-body">
+                        {% block employee_form %}
+                        <form method="POST" action="/accounts/edit-employee/{{emp.id}}/{{emp.auth_token}}/{{emp.first_name}}" enctype="multipart/form-data" >
+                            {% csrf_token %}
+                            <div class="col-lg-12">
+                            
+                                <div class="row">
+                                
+                                    <div class="col-lg-6">
+                                    
+                                        <div class="form-group">
+                                        
+                                            <label class="form-label">First Name <span class="text-red">*</span></label>
+                                        
+                                            <input type="text" class="form-control" value="{{emp.first_name}}" required name="first_name" id="first_name" placeholder="Enter your firstname"  />
+                                        
+                                            <span class="tx-danger" style="color:red">{{fm.errors.first_name}}</span>
+                                        
+                                        </div>
+                                    
+                                    </div>
+                                
+                                    <div class="col-lg-6">
+                                    
+                                        <div class="form-group">
+                                        
+                                            <label class="form-label">Last Name <span class="text-red">*</span></label>
+                                        
+                                            <input type="text"  class="form-control" value="{{emp.last_name}}" required name="last_name" id="last_name" placeholder="Enter your lastname"  />
+                                        
+                                            <span class="tx-danger" style="color:red">{{fm.errors.last_name}}</span>
+                                        
+                                        </div>
+                                    
+                                    </div>
+                                
+                                </div>
+                            
+                                <div class="row row-sm">
+                                
+                                    <div class="col-lg-6">
+                                    
+                                        <div class="form-group">
+                                        
+                                            <label class="form-label">Email <span class="text-red">*</span></label>
+                                        
+                                            <input type="email" class="form-control" value="{{emp.email}}" required name="email" id="email" placeholder="Enter your mail-id"  />
+                                        
+                                            <span class="tx-danger" style="color:red">{{fm.errors.email}}</span>
+                                        
+                                        </div>
+                                    
+                                    </div>
+                                
+                                    <div class="col-lg-6">
+                                    
+                                        <div class="form-group">
+                                        
+                                            <label class="form-label">Phone <span class="text-red">*</span></label>
+                                        
+                                            <input type="phone" class="form-control" value="{{emp.Phone}}" required name="Phone" id="Phone" placeholder="Enter You Number"  />
+                                        
+                                            <span class="tx-danger" style="color:red">{{fm.errors.Phone}}</span>
+                                        
+                                        </div>
+                                    
+                                    </div>
+                                
+                                </div>
+                            
+                                <div class="row row-sm">
+                                
+                                    <div class="col-lg-6">
+                                    
+                                      <label class="form-label">Department <span class="text-red">*</span></label>
+                                    
+                                      <div class="wd-150 mg-b-30">
+                                    
+                                        <div class="input-group">
+                                        
+                                          <div class="input-group-prepend">
+                                        
+                                          </div><!-- input-group-prepend -->
+                                      
+                                          <select class="form-control" name="Department" id="Department" required>
+                                            {% block option %}
+                                                <option value="{{ emp.Department_id }}">{{ emp.Department}}</option>
+                                            {% endblock option %}
+                                            {% for dt in Dept_data %}
+                                                <option value="{{dt.id}}">{{ dt.Department_Name }}</option>
+                                            {% endfor %}
+                                          </select>
+                                      
+                                        </div>
+                                    
+                                      </div><!-- wd-150 --> 
+                                  
+                                    </div>
+                                
+                                    <div class="col-lg-6">
+                                    
+                                      <label class="form-label">Designation <span class="text-red">*</span></label>
+                                    
+                                      <div class="wd-150 mg-b-30">
+                                    
+                                        <div class="input-group">
+                                        
+                                          <div class="input-group-prepend">
+                                        
+                                          </div><!-- input-group-prepend -->
+                                      
+                                          <select class="form-control" name="Designation" id="Designation" required>
+                                            <option label="Choose one"></option>
+                                            {% for dt in Desg_data %}
+                                              <option value="{{dt.Department_Name_id}}">{{ dt.Designation }}</option>
+                                            {% endfor %}
+                                          </select>
+                                        </div>
+                                    
+                                      </div><!-- wd-150 --> 
+                                  
+                                    </div>
+                                
+                                </div>
+                            
+                                <br />
+                            
+                                <div class="row row-sm">
+                                
+                                    <div class="col-lg-4">
+                                    
+                                        <label class="form-label">Date Of Joining <span class="text-red">*</span> </label>
+                                    
+                                        <div class="wd-150 mg-b-30">
+                                        
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                            </div><!-- input-group-prepend -->                                        
+                                            <input type="date" required class="form-control" name="Date_Of_Joining" id="Date_Of_Joining" />
+                                          </div>    
+                                          <span class="tx-danger" style="color:red">* {{emp.Date_Of_Joining}}</span>
+                                        </div><!-- wd-150 --> 
+                                    
+                                    </div>
+                                
+                                    <div class="col-lg-4">
+                                    
+                                        <label class="form-label">Resignation Date </label>
+                                    
+                                        <div class="wd-150 mg-b-30">
+                                        
+                                          <div class="input-group">
+                                        
+                                            <div class="input-group-prepend">
+                                            
+                                            </div><!-- input-group-prepend -->
+                                        
+                                            <input type="date" class="form-control" placeholder="YYYY-MM-DD" name="Resignation_Dt" id="Resignation_Dt" />
+                                        
+                                            <span class="tx-danger" style="color:red">{{fm.errors.Resignation_Dt}}</span>
+                                        
+                                          </div>
+                                      
+                                        </div><!-- wd-150 --> 
+                                    
+                                    </div>
+                                
+
+                                
+                                    <div class="col-lg-4">
+                                    
+                                        <label class="form-label">Termination Date </label>
+                                    
+                                        <div class="wd-150 mg-b-30">
+                                        
+                                          <div class="input-group">
+                                        
+                                            <div class="input-group-prepend">
+                                            
+                                            </div><!-- input-group-prepend -->
+                                        
+                                            <input type="date" class="form-control" placeholder="YYYY-MM-DD" name="Termination_Dt" id="Termination_Dt" />
+                                        
+                                            <span class="tx-danger" style="color:red">{{fm.errors.Termination_Dt}}</span>
+                                        
+                                          </div>
+                                      
+                                        </div><!-- wd-150 --> 
+                                    
+                                    </div>
+                                
+                                </div>
+                            
+                                <br />
+                            
+                                <div class="row sm">
+                                
+                                    <div class="col-lg-6">
+                                    
+                                      <label class="form-label">Shift Type <span class="text-red">*</span></label>
+                                    
+                                      <div class="wd-150 mg-b-30">
+                                    
+                                        <div class="input-group">
+                                        
+                                          <div class="input-group-prepend">
+                                        
+                                          </div><!-- input-group-prepend -->
+                                      
+                                          <select class="form-control" name="Shift_Type" required id="Shift_Type" data-placeholder="Choose one">
+                                        
+                                            <option value="{{emp.Shift_Type}}">{{emp.Shift_Type}}</option>
+                                        
+                                            {% for data in Shift %}
+                                        
+                                              <option value="{{data.Shift_Type}}">{{ data.Shift_Type }}</option>
+                                        
+                                            {% endfor %}
+                                        
+                                          </select>
+                                      
+                                        </div>
+                                    
+                                      </div><!-- wd-150 --> 
+                                  
+                                    </div>
+                                
+                                    <div class="col-lg-6">
+                                    
+                                        <label class="form-label">Salary <span class="text-red">*</span> </label>
+                                    
+                                        <div class="wd-150 mg-b-30">
+                                        
+                                          <div class="input-group">
+                                        
+                                            <div class="input-group-prepend">
+                                            
+                                            </div><!-- input-group-prepend -->
+                                        
+                                            <input type="number" value="{{emp.Salary}}" class="form-control" placeholder="$ Salary" name="Salary" id="Basic_Salary" />
+                                        
+                                            <span class="tx-danger" style="color:red">{{fm.errors.Basic_Salary}}</span>
+                                        
+                                          </div>
+                                      
+                                        </div><!-- wd-150 --> 
+                                    
+                                    </div>
+                                
+                                </div>
+                            
+                                <br />
+                            
+                                <div class="row row-sm">
+                                
+                                    <div class="col-lg-6">
+                                    
+                                        <div class="form-group">
+                                            <label class="form-label">Gender <span class="text-red">*</span></label>
+                                            <select class="form-control  custom-select" required name="Gender" id="Gender" data-placeholder="Choose one"  />
+                                                <option value="{{emp.Gender}}">{{emp.Gender}}</option>
+                                                {% for Gender in Gender %}
+                                                    <option value="{{Gender.id}}">{{Gender.Gender}}</option>
+                                                {% endfor %}
+                                            </select>                                    
+                                            <span class="tx-danger" style="color:red">{{fm.errors.Gender}}</span>
+                                        </div>
+                                    
+                                    </div>
+                                
+                                    <div class="col-lg-6">
+                                    
+                                        <label class="form-label">Select Roll <span class="text-red">*</span></label>
+                                    
+                                        <div class="row">
+                                        
+                                            <div class="col-md-4 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+                                            
+                                                <div class="form-group">
+                                                
+                                                  <label class="form-label"></label>
+                                                
+                                                  <label class="form-label">Admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                
+                                                    <span class="custom-switch-description mr-2"></span>
+                                                
+                                                    <input type="checkbox" {% if emp.is_admin %}checked{% endif %} name="is_admin" id="is_admin" class="custom-switch-input" />
+                                                
+                                                    <span class="custom-switch-indicator custom-radius"></span>
+                                                
+                                                  </label>
+                                              
+                                                </div>
+                                            
+                                            </div>
+                                        
+                                            <div class="col-md-4 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+                                            
+                                                <div class="form-group">
+                                                
+                                                    <label class="form-label"></label>
+                                                
+                                                    <label class="form-label">Employee
+                                                    
+                                                        <span class="custom-switch-description mr-2"></span>
+                                                    
+                                                        <input type="checkbox" {% if emp.is_employee %}checked{% endif %} name="is_employee" id="is_employee" class="custom-switch-input" />
+                                                    
+                                                        <span class="custom-switch-indicator custom-radius"></span>
+                                                    
+                                                    </label>
+                                                
+                                                </div>
+                                            
+                                            </div>
+                                        
+                                            <div class="col-md-4 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+                                            
+                                                <div class="form-group">
+                                                
+                                                    <label class="form-label"></label>
+                                                
+                                                    <label class="form-label">Client&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    
+                                                        <span class="custom-switch-description mr-2"></span>
+                                                    
+                                                        <input type="checkbox" {% if emp.is_client %}checked{% endif %} name="is_client" class="custom-switch-input" />
+                                                    
+                                                        <span class="custom-switch-indicator custom-radius"></span>
+                                                    
+                                                    </label>
+                                                
+                                                </div>
+                                            
+                                            </div>
+                                        
+                                        </div>
+                                    
+                                    </div>
+                                
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+            
+                                <button type="reset" class="btn btn-danger">Close</button>
+                    
+                                <button type="Submit" class="btn btn-success">Save changes</button>
+                    
+                            </div>
+                        </form>
+                        {% endblock employee_form %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!--End Row-->
+    </div>
+
+</div>
+
+{% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,67 @@
+    <!--Apply Leaves Modal -->
+	<div class="modal fade"  id="applyleaves"  data-bs-backdrop="static">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Apply Leaves</h5>
+					<button  class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<form action="{% url 'leave-request' %}" method="POST">
+					{% csrf_token %}
+				<div class="modal-body">
+					<div class="leave-types">
+						<input type="hidden" class="form-control" value="{{request.user.id}}" name="user" id="user">
+						<div class="form-group">
+							<label class="form-label">Start Date</label>
+							<div class="wd-150 mg-b-30">
+								<div class="input-group">
+								<div class="input-group-prepend">
+								</div><!-- input-group-prepend -->
+								<input type="date" class="form-control mb-4" required="" name="Start_Date" id="Start_Date" placeholder="Start Date">
+								</div>
+							</div><!-- wd-150 -->
+						</div>
+						<div class="form-group">
+							<label class="form-label">End Date</label>
+							<div class="wd-150 mg-b-30">
+								<div class="input-group">
+									<input type="date" class="form-control mb-4" required="" name="End_Date" id="End_Date" placeholder="End Date">
+								</div>
+							</div><!-- wd-150 -->
+						</div>
+						<div class="form-group">
+							<label class="form-label">Leaves Types</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+								</div><!-- input-group-prepend -->
+								<select class="form-control custom-select mb-4" required="" name="Leave_Type" id="Leave_Type" data-placeholder="Choose one">
+								  <option label="Choose one"></option>
+								  {% for data in leave_type %}
+									<option value="{{data.id}}">{{ data.Leave }}</option>
+								  {% endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label">Reason:</label>
+							<textarea class="form-control" name="Reason" id="Reason" rows="5"></textarea>
+						</div>
+					</div>
+				</div>
+			</form>
+				<div class="modal-footer">
+					<div class="">
+						<label class="mb-0 font-weight-semibold">Selected Days:</label>
+						<span class="badge badge-danger badge-pill ml-2">2</span>
+					</div>
+					<div class="ml-auto">
+						<button type="reset" class="btn btn-danger">Cancel</button>
+            			<button type="submit" name="submit" class="btn btn-success">Save Changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+			<!-- End Apply Leaves Modal  -->

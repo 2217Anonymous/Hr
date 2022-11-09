@@ -1,0 +1,270 @@
+{% extends '../_partials/_admin_base.html' %}
+{% load static %}
+{% block content %}
+
+<!--Page header-->
+
+<div class="page-header d-xl-flex d-block">
+
+    <div class="page-leftheader">
+
+        <h4 class="page-title">Employees</h4>
+
+    </div>
+
+    <div class="page-rightheader ml-md-auto">
+
+        <div class="align-items-end flex-wrap my-auto right-content breadcrumb-right">
+
+            <div class="btn-list">
+
+                <a class="btn btn-primary mr-3" href="{% url 'employee-register' %}">Add New Employee</a>
+
+                <button  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </button>
+
+                <button  class="btn btn-light" data-placement="top" data-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </button>
+
+                <button  class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--End Page header-->
+
+<!-- Row-->
+
+<div class="row">
+
+    <div class="col-xl-3 col-lg-6 col-md-12">
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-7">
+
+                        <div class="mt-0 text-left"> <span class="font-weight-semibold">Total Employees</span>
+
+                            <h3 class="mb-0 mt-1 text-success">5,678</h3>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-5">
+
+                        <div class="icon1 bg-success-transparent my-auto  float-right"> <i class="las la-users"></i> </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-3 col-lg-6 col-md-12">
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-7">
+
+                        <div class="mt-0 text-left"> <span class="font-weight-semibold">Total Male Employees</span>
+
+                            <h3 class="mb-0 mt-1 text-primary">3,876</h3>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-5">
+
+                        <div class="icon1 bg-primary-transparent my-auto  float-right"> <i class="las la-male"></i> </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-3 col-lg-6 col-md-12">
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-7">
+
+                        <div class="mt-0 text-left"> <span class="font-weight-semibold">Total Female Employees</span>
+
+                        <h3 class="mb-0 mt-1 text-secondary">1,396</h3> </div>
+
+                    </div>
+
+                    <div class="col-5">
+
+                        <div class="icon1 bg-secondary-transparent my-auto  float-right"> <i class="las la-female"></i> </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-3 col-lg-6 col-md-12">
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-7">
+
+                        <div class="mt-0 text-left"> <span class="font-weight-semibold">Total New Employees</span>
+
+                        <h3 class="mb-0 mt-1 text-danger">398</h3> </div>
+
+                    </div>
+
+                    <div class="col-5">
+
+                        <div class="icon1 bg-danger-transparent my-auto  float-right"> <i class="las la-user-friends"></i> </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- End Row -->
+
+
+
+<!-- Row -->
+
+<div class="row">
+
+    <div class="col-xl-12 col-md-12 col-lg-12">
+
+        <div class="card">
+
+            <div class="card-header  border-0">
+
+                <h4 class="card-title">Employees List</h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered text-nowrap border-bottom my_res_table">
+                        <thead>
+                            <tr>
+                                <th class="border-bottom-0 w-10">User</th>
+                                <th class="border-bottom-0">Employee Name</th>
+                                <th class="border-bottom-0">Employee Id</th>
+                                <th class="border-bottom-0">Phone Number</th>
+                                <th class="border-bottom-0">Gender</th>
+                                <th class="border-bottom-0">is_employee</th>
+                                <th class="border-bottom-0">is_admin</th>
+                                <th class="border-bottom-0">is_active</th>
+                                <th class="border-bottom-0">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dt in tbl_data  %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex">
+                                        <span class="avatar avatar-md brround mr-3" style="background-image: url({% if dt.Profile_Pic == '' %} {% static 'assets/profile/profile.png' %} {% else %}{{dt.Profile_Pic.url}} {% endif %})"></span><span> </span>
+                                        <div class="mr-3 mt-0 mt-sm-1 d-block">
+                                            <h6 class="mb-1 fs-14">{{dt.username}}</h6>
+                                            <p class="mb-0 fs-12">{{dt.email}}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{dt.first_name}} {{dt.last_name}}</td>
+                                <td>{{dt.Employee_Id}}</td>
+                                <td>+91 {{dt.Phone}}</td>
+                                <td><span class="feather feather-men text-success"></span>{{dt.Gender}}</td>
+                                <td>
+                                    <span {% if dt.is_employee %} class="feather feather-check-circle text-success" {% else %} class="feather feather-x-circle text-danger" {% endif %}>
+                                        {{dt.is_employee}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span {% if dt.is_admin %} class="feather feather-check-circle text-success" {% else %} class="feather feather-x-circle text-danger" {% endif %}>
+                                        {{dt.is_admin}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span {% if dt.is_active %} class="feather feather-check-circle text-success" {% else %} class="feather feather-x-circle text-danger" {% endif %}>
+                                        {{dt.is_active}}
+                                    </span>
+                                </td>
+
+                                <td class="text-center">
+
+                                    <a href={% url 'edit-employee' id=dt.id token=dt.auth_token name=dt.first_name %} class="action-btns" title="Edit">
+
+                                        <i class="feather feather-edit-3 primary text-success"></i>
+
+                                    </a>
+
+                                    <a href={% url 'user-delete' dt.id %} onclick="return confirm('Are sure you want to Delete? ')" class="action-btns" data-toggle="tooltip" data-placement="top" title="Delete">
+
+                                      <i class="feather feather-trash-2 text-danger"></i>
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                            {% include '_partials/_employee/_manual-attendance.html' %}
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

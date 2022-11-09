@@ -1,0 +1,105 @@
+{% extends '../_partials/_admin_base.html' %}
+{% load static %}
+{% block content %}
+<!--Page header-->
+<div class="page-header d-xl-flex d-block">
+  <div class="page-leftheader">
+    <h4 class="page-title">Notification</h4>
+  </div>
+  <div class="page-rightheader ml-md-auto">
+    <div class="d-flex align-items-end flex-wrap my-auto right-content breadcrumb-right">
+      <div class="btn-list">
+        <button  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </button>
+        <button  class="btn btn-light" data-placement="top" data-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </button>
+        <button  class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Page header-->
+
+<!-- Row -->
+<div class="row">
+  <div class="col-lg-12 col-md-12">
+    <form action="{% url 'notification' %}" method="post" class="card">
+      {% for message in messages %}
+        <p style="color:red;">{{message}}</p>
+      {% endfor %}
+      {% csrf_token %}
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title">Notification</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            <div class="form-group">
+              <label class="form-label">Employee
+                <span class="custom-switch-description mr-2">&emsp;</span>
+                <input type="checkbox" name="Employee" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            <div class="form-group">
+              <label class="form-label">Holidays
+                <span class="custom-switch-description mr-2">&emsp;</span>
+                <input type="checkbox" name="Holidays" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            <div class="form-group">
+              <label class="form-label">Leaves
+                <span class="custom-switch-description mr-2">&emsp;&emsp;</span>
+                    <input type="checkbox" name="Leaves" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            <div class="form-group">
+              <label class="form-label">Events
+                <span class="custom-switch-description mr-2">&emsp;&emsp;</span>
+                <input type="checkbox" name="Events" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            <div class="form-group">
+              <label class="form-label">Chat
+                <span class="custom-switch-description mr-2">&emsp;&emsp;&emsp;</span>
+                <input type="checkbox" name="Chat" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            <div class="form-group">
+              <label class="form-label">Jobs
+                <span class="custom-switch-description mr-2">&emsp;&emsp;&emsp;</span>
+                <input type="checkbox" name="Jobs" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <button type="reset" class="btn btn-danger  ">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>           
+						<!-- End Row-->
+            
+{% endblock %}

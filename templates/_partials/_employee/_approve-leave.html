@@ -1,0 +1,39 @@
+<div class="modal fade"  id="leave_approve{{dt.id}}"  data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Leave Approval</h6><button aria-bs-label="Close" class="close" data-bs-dismiss="modal" ><span aria-bs-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'leave-approval' %}" method="POST">
+                    {% csrf_token %}
+                  <input type="hidden" value="{{dt.id}}" name="id"/>
+                  <label class="form-label">Approve Description</label>
+                  <div class="wd-150 mg-b-30">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div><!-- input-group-prepend -->
+                      <input type="text" class="form-control" value="" name="Approved_Description" id="Approved_Description" placeholder="Approved Description">
+                    </div>
+                  </div><!-- wd-150 -->   
+                  <br>  
+                  <label class="form-label">Is Approved</label>
+                  <div class="wd-150 mg-b-30">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div><!-- input-group-prepend -->
+                      <select class="form-control custom-select" id="is_approved" name="is_approved" data-placeholder="Choose one">
+                        <option label="Choose one"></option>
+                        <option value=True>Approved</option>
+                        <option value=False>Rejected</option>
+                    </select>
+                    </div>
+                  </div><!-- wd-150 -->
+                  <br /> 
+                 <button type="submit" name="submit" class="btn btn-success">Save Changes</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>

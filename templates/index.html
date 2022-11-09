@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<!-- Meta data -->
+		<meta charset="UTF-8">
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+		<meta content="Sortscript - It is one of the Major- HR, Employee and Job Dashboard." name="description">
+		<meta content="Sortscript Technologies Private Limited" name="author">
+		<!-- Title -->
+		<title>Sortscript</title>
+
+		<!--Favicon -->
+		<link rel="icon" href="{% for dt in logo %}{{dt.Favicon.url}}{% endfor %}" type="image/x-icon"/>
+
+		<!-- Bootstrap css -->
+		<link href="{% static 'assets/plugins/bootstrap/css/bootstrap.css' %}" rel="stylesheet" />
+
+		<!-- Style css -->
+		<link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+		<link href="{% static 'assets/css/dark.css' %}" rel="stylesheet" />
+		<link href="{% static 'assets/css/skin-modes.css' %}" rel="stylesheet" />
+
+		<!-- Animate css -->
+		<link href="{% static 'assets/css/animated.css' %}" rel="stylesheet" />
+
+		<!---Icons css-->
+		<link href="{% static 'assets/css/icons.css' %}" rel="stylesheet" />
+
+		<!-- Select2 css -->
+		<link href="{% static 'assets/plugins/select2/select2.min.css' %}" rel="stylesheet" />
+
+		<!-- P-scroll bar css-->
+		<link href="{% static 'assets/plugins/p-scrollbar/p-scrollbar.css' %}" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="page coming-bg">
+					<div class="page-content m-0">
+						<div class="container text-center">
+							<h3 class="display-5 mb-5 font-weight-semibold">Coming soon</h3>
+							<img class="logo mb-3" src="{% for dt in logo %}{{dt.Logo.url}}{% endfor %}" style="height:50px" />
+							<h1 class="h4 mb-3">Site Nearly Already Ready</h1><br/>
+							<p class="h5 font-weight-normal mb-4 leading-normal">You may have mistyped the address or the page may have moved.</p>
+							<div class="row">
+								<div class="col-md-6 d-block mx-auto mb-2">
+									<div class="row">
+										<div class="col text-left">
+											<span class="badge badge-primary-light badge-pill">Working</span>
+										</div>
+										<div class="col col-md-12">
+											<div class="fs-18 font-weight-semibold">50%</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="progress-wrapper mb-5 col-md-6 d-block mx-auto">
+									<div class="progress progress-md">
+										<div class="progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+									</div>
+								</div>
+							</div>
+							<div class="coming-footer">
+								<a href="{% url 'login' %}" class="btn ripple btn-primary btn-md"><span><i class="fa fa-home"></i><span> Home</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>		
+		</div>
+
+		<!-- Jquery js-->
+		<script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+
+		<!-- Bootstrap4 js-->
+		<script src="{% static 'assets/plugins/bootstrap/popper.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+		<!--Othercharts js-->
+		<script src="{% static 'assets/plugins/othercharts/jquery.sparkline.min.js' %}"></script>
+
+		<!-- Select2 js -->
+		<script src="{% static 'assets/plugins/select2/select2.full.min.js' %}"></script>
+
+		<!-- P-scroll js-->
+		<script src="{% static 'assets/plugins/p-scrollbar/p-scrollbar.js' %}"></script>
+
+		<!-- Custom js-->
+		<script src="{% static 'assets/js/custom.js' %}"></script>
+
+	</body>
+</html>

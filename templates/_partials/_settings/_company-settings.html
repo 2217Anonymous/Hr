@@ -1,0 +1,113 @@
+<form action="{% url 'company-settings' %}" method="post" class="card">
+  {% csrf_token %}
+    <div class="tab-content adminsetting-content" id="setting-tabContent">
+      <div class="tab-pane fade show active" id="tab-1" role="tabpanel">
+        <div class="card">
+          <div class="card-header  border-0">
+            <h4 class="card-title">General Settings</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="form-label mb-0 mt-2">Company Name</label>
+                  <input type="text" class="form-control" value="{% for dt in company %}{{dt.Company_Name}}{% endfor %}" name="Company_Name" id="Company_Name" placeholder="Company Name">
+                  <span class="tx-danger" style="color:red">{{fm.errors.Company_Name}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label mb-0 mt-2">Email</label>
+                  <input type="email" class="form-control" value="{% for dt in company %}{{dt.Email}}{% endfor %}" name="Email" placeholder="Email">
+                  <span class="tx-danger" style="color:red">{{fm.errors.Email}}</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label mb-0 mt-2">Phone Number</label>
+                  <input type="number" class="form-control" value="{% for dt in company %}{{dt.Phone_Number}}{% endfor %}" name="Phone_Number" placeholder="Phone Number">
+                  <span class="tx-danger" style="color:red">{{fm.errors.Phone_Number}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label mb-0 mt-2">Contact Person</label>
+                  <input type="text" class="form-control" value="{% for dt in company %}{{dt.Contact_Person}}{% endfor %}" name="Contact_Person" id="Contact_Person" placeholder="Contact Person">
+                  <span class="tx-danger" style="color:red">{{fm.errors.Contact_Person}}</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label mb-0 mt-2">Company Address</label>
+                  <textarea rows="2" class="form-control" value="{% for dt in company %}{{dt.Address}}{% endfor %}" name="Address" placeholder="Company Address..."></textarea>
+                  <span class="tx-danger" style="color:red">{{fm.errors.Address}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label mb-0 mt-2">Country</label>
+                  <select class="form-control custom-select" name="Country" data-placeholder="Select Country" id="country">
+                    <option label="Select Contry" value="1" disabled selected="false">Select country</option>         
+                     {% for c in country %}
+                      <option value="{{c.id}}">{{c.Country_Name}}</option>
+                     {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label mb-0 mt-2">States</label>
+                  <select class="form-control custom-select" name="state" data-placeholder="Select State" id="state">
+                    <option label="Select State" value="1" disabled selected="false">Select State</option>
+                    {% for s in state %}
+                      <option value="{{s.Country_Name_id}}">{{s.State_Name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label mb-0 mt-2">Postal Code</label>
+                  <input type="number" class="form-control" value="{% for dt in company %}{{dt.Postal_Code}}{% endfor %}" name="Postal_Code" placeholder="Postal Code">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label mb-0 mt-2">Website URL</label>
+                  <input type="url" class="form-control" value="{% for dt in company %}{{dt.Website_URL}}{% endfor %}" name="Website_URL" placeholder="Website URL">
+                  <span class="tx-danger" style="color:red">{{fm.errors.Website_URL}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <button type="reset" class="btn btn-danger  ">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</form>  
+<script>
+    document.getElementById("Company_Name").innerHTML="{{dt.CompanyName}}";
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+        var $countryvar=$("#country");
+        var $statevar=$("#state");
+        var $options=$statevar.find('option')
+            $countryvar.on('change', function(){
+              $statevar.html($options.filter('[value="'+this.value+'"]'));
+            }).trigger('change');
+  });
+</script>

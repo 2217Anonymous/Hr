@@ -1,0 +1,80 @@
+{% extends '../_partials/_admin_base.html' %}
+{% block title %} Group {% endblock title %} 
+{% load static %}
+{% block content %}
+<!--Page header-->
+<div class="page-header d-xl-flex d-block">
+  <div class="page-leftheader">
+    <h4 class="page-title"> <span class="font-weight-normal text-muted ml-2">Group</span></h4>
+  </div>
+</div>
+<!--End Page header-->
+
+<!--Row-->
+<div class="row">
+  <div class="col-lg-5">
+    <div class="card">
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title">Group</h3>
+      </div>
+      <div class="card-body">
+        <form action="{% url 'group_add' %}" method="POST">
+            {% csrf_token %}
+          <label class="form-label">Group Name <span class="text-red">*</span> </label>
+          <div class="wd-150 mg-b-30">
+            <div class="input-group">
+              <div class="input-group-prepend">
+              </div><!-- input-group-prepend -->
+              <input type="text" class="form-control" placeholder="Group Name" name="name" />
+              {% for error in fm.Department_Name.errors %}
+                <span class="tx-danger" style="color:red">{{error}}</span>
+              {% endfor %}
+            </div>
+          </div><!-- wd-150 -->   
+          <br>  
+      </div>
+        <div class="card-footer">
+          <button type="submit" name="submit" class="btn btn-success">Add Group</button>
+          <button type="reset" class="btn btn-danger">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <div class="card">
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title">Group List</h3>
+      </div>
+      <div class=" card-body">
+        <div class="table-responsive attendance_table mt-4 border-top">
+          <table class="mb-0 table table-bordered text-nowrap border-bottom my-datatable">
+            <thead>
+              <tr>
+                {% comment %} <th class="wd-15p border-bottom-0">Id</th> {% endcomment %}
+                <th class="wd-15p border-bottom-0">Group Name</th>
+                <th class="wd-15p border-bottom-0">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for dt in group %}
+                <tr class="border-bottom">
+                  <td class="font-weight-semibold fs-14">{{dt.name}}</td>
+                  <td class="text-center">
+                    <a href={% url 'group-perms' dt.name %} class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Add">
+                        <i class="feather feather-plus text-danger"></i>
+                      </a>
+                    <a href={% url 'group_del' dt.name %} onclick="return confirm('Are sure you want to Delete? ')" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                      <i class="feather feather-trash-2 text-danger"></i>
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

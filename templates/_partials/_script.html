@@ -1,0 +1,287 @@
+{% load static %}
+		<script>
+			//auto close bootstrap alert after 3s
+			$(".alert").fadeTo(500,0).slideUP(500,function(){
+				$(this).remove();
+			},3000)
+
+			//Script to protect against ddos attack (prevent f5 after submit)
+			if(window.history.replaceState){
+				window.history.replaceState(null,null,window.location.href);
+			}
+		</script>
+		<script type="text/javascript" src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+			<!--Moment js-->
+		<script type="text/javascript" src="{% static 'assets/plugins/moment/moment.js' %}"></script>
+
+		<!-- Bootstrap js-->
+		<script type="text/javascript" src="{% static 'assets/plugins/bootstrap/popper.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+		<!--Othercharts js--> 
+		<script type="text/javascript" src="{% static 'assets/plugins/othercharts/jquery.sparkline.min.js' %}"></script>
+
+		<!--Sidemenu js-->
+		<script type="text/javascript" src="{% static 'assets/plugins/sidemenu/sidemenu.js' %}"></script>
+
+		<!-- P-scroll js-->
+		<script type="text/javascript" src="{% static 'assets/plugins/p-scrollbar/p-scrollbar.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/p-scrollbar/p-scroll1.js' %}"></script>
+
+		<!--Sidebar js-->
+		<script type="text/javascript" src="{% static 'assets/plugins/sidebar/sidebar.js' %}"></script>
+
+		<!-- INTERNAL Index js-->
+		<script type="text/javascript" src="{% static 'assets/js/employee/emp-attendance.js' %}"></script>
+		{% comment %} <script type="text/javascript" src="{% static 'assets/js/employee/emp-sidemenuchart.js' %}"></script> {% endcomment %}
+
+		<!-- INTERNAL File uploads js -->
+        <script type="text/javascript" src="{% static 'assets/plugins/fileupload/js/dropify.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/js/filupload.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/fancyuploder/jquery.ui.widget.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/fancyuploder/jquery.fileupload.js' %}"></script>
+        <script type="text/javascript" src="{% static 'assets/plugins/fancyuploder/jquery.iframe-transport.js' %}"></script>
+        <script type="text/javascript" src="{% static 'assets/plugins/fancyuploder/jquery.fancy-fileupload.js' %}"></script>
+        <script type="text/javascript" src="{% static 'assets/plugins/fancyuploder/fancy-uploader.js' %}"></script>
+
+		<!-- Select2 js -->
+		<script type="text/javascript" src="{% static 'assets/plugins/select2/select2.full.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/js/formelementadvnced.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/js/form-elements.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/js/select2.js' %}"></script>
+
+		<!-- INTERNAL Multiple select js -->
+		<script type="text/javascript" src="{% static 'assets/plugins/multipleselect/multiple-select.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/multipleselect/multi-select.js' %}"></script>
+
+		<!-- INTERNAL Sumoselect js-->
+		<script type="text/javascript" src="{% static 'assets/plugins/sumoselect/jquery.sumoselect.js' %}"></script>
+
+		<!-- INTERNAL Peitychart js-->
+		<script type="text/javascript" src="{% static 'assets/plugins/peitychart/jquery.peity.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/peitychart/peitychart.init.js' %}"></script>
+
+		<!-- INTERNAL Apexchart js-->
+		<script type="text/javascript" src="{% static 'assets/plugins/apexchart/apexcharts.js' %}"></script>
+
+		<!-- INTERNAL Vertical-scroll js-->
+		<script type="text/javascript" src="{% static 'assets/plugins/vertical-scroll/jquery.bootstrap.newsbox.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/vertical-scroll/vertical-scroll.js' %}"></script>
+
+		<!-- INTERNAL  Datepicker js -->
+		<script type="text/javascript" src="{% static 'assets/plugins/date-picker/jquery-ui.js' %}"></script>
+
+		<!-- INTERNAL Chart js -->
+		{% comment %} <script type="text/javascript" src="{% static 'assets/plugins/chart/chart.bundle.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/chart/utils.js' %}"></script> {% endcomment %}
+
+		<!-- INTERNAl Jquery.steps js -->
+		<script type="text/javascript" src="{% static 'assets/plugins/jquery-steps/jquery.steps.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/parsleyjs/parsley.min.js' %}"></script>
+
+		<!-- INTERNAL Forn-wizard js-->
+		<script type="text/javascript" src="{% static 'assets/plugins/formwizard/jquery.smartWizard.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/formwizard/fromwizard.js' %}"></script>
+
+		<!-- INTERNAL Daterangepicker js-->
+		<script type="text/javascript" src="{% static 'assets/plugins/daterangepicker/moment.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/daterangepicker/daterangepicker.js' %}"></script>
+
+		<!-- INTERNAL Accordion-Wizard-Form js-->
+		<script type="text/javascript" src="{% static 'assets/plugins/accordion-Wizard-Form/jquery.accordion-wizard.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/js/form-wizard.js' %}"></script>
+
+		<!-- INTERNAL Datepicker js -->
+		<script type="text/javascript" src="{% static 'assets/plugins/date-picker/date-picker.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/date-picker/jquery-ui.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/input-mask/jquery.maskedinput.js' %}"></script>
+
+		<!-- INTERNAL Timepicker js -->
+		{% comment %} <script type="text/javascript" src="{% static 'assets/plugins/time-picker/jquery.timepicker.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/time-picker/toggles.min.js' %}"></script> {% endcomment %}
+
+		<!-- INTERNAL Data tables -->
+		<script type="text/javascript" src="{% static 'assets/plugins/datatable/js/jquery.dataTables.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/datatable/js/dataTables.bootstrap5.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/datatable/js/dataTables.buttons.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/datatable/js/buttons.bootstrap5.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/datatable/js/jszip.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/datatable/pdfmake/pdfmake.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/datatable/pdfmake/vfs_fonts.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/datatable/js/buttons.html5.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/datatable/js/buttons.print.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/datatable/js/buttons.colVis.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/datatable/dataTables.responsive.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/datatable/responsive.bootstrap5.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/js/datatables.js' %}"></script>
+
+		<!-- INTERNAL Notifications js -->
+		{% comment %} <script type="text/javascript" src="{% static 'assets/plugins/notify/js/sample.js' %}"></script> {% endcomment %}
+		<script type="text/javascript" src="{% static 'assets/plugins/notify/js/notifIt.js' %}"></script> 
+		
+		<!-- INTERNAL Chartjs rounded-barchart -->
+		{% comment %} <script type="text/javascript" src="{% static 'assets/plugins/chart.min/chart.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/plugins/chart.min/rounded-barchart.js' %}"></script> {% endcomment %}
+
+		<!-- INTERNAL jQuery-countdowntimer js -->
+		<script type="text/javascript" src="{% static 'assets/plugins/jQuery-countdowntimer/jQuery.countdownTimer.js' %}"></script>
+		
+		<!-- INTERNAl Bootstrap-timepicker js-->
+		<script type="text/javascript" src="{% static 'assets/plugins/bootstrap-timepicker/bootstrap-timepicker.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/js/hr/hr-attlist.js' %}"></script>
+		<!--Sticky js -->
+		<script src="{% static 'assets/js/sticky.js' %}"></script>
+		<!-- INTERNAL Index js-->
+		{% comment %} <script type="text/javascript" src="{% static 'assets/js/index1.js' %}"></script> {% endcomment %}
+
+		<!-- Custom js-->
+		<script type="text/javascript" src="{% static 'assets/js/custom.js' %}"></script>
+		<script src="{% static 'assets/js/themeColors.js' %}"></script>
+		{% if messages %}
+    		{% for message in messages %}
+				<script>
+					notif({
+						msg: "<b>{{message}}</b>",
+						type:  "{{message.tags}}",								
+
+					});				
+				</script>
+			{% endfor %}
+		{% endif %}
+		
+		<script>
+			// Stay Page
+			{% comment %} window.onbeforeunload = function(){
+				return 'Are you sure you want to leave?';
+			  }; {% endcomment %}
+
+			//Time Converter
+			var intime = document.getElementById('intime');
+
+			function onInTimeChange() 
+			{
+				var timeSplit = intime.value.split(':'),hours,minutes,meridian;
+				hours = timeSplit[0];
+				minutes = timeSplit[1];
+				if (hours > 12) 
+				{
+					meridian = 'PM';
+					hours -= 12;
+				} 
+				else if (hours < 12) 
+				{
+					meridian = 'AM';
+					if (hours == 0) 
+					{
+						hours = 12;
+					}
+				} 
+				else {
+					meridian = 'PM';
+				}
+				document.getElementById('in_').value = hours + ':' + minutes + '' + meridian
+			}
+
+			var outtime = document.getElementById('outtime');
+
+			function onOutTimeChange() 
+			{
+				var timeSplit = outtime.value.split(':'),hours,minutes,meridian;
+				hours 	= timeSplit[0];
+				minutes = timeSplit[1];
+				if (hours > 12) 
+				{
+					meridian = 'PM';
+					hours -= 12;
+				} 
+				else if (hours < 12) 
+				{
+					meridian = 'AM';
+					if (hours == 0) 
+					{
+						hours = 12;
+					}
+				} 
+				else {
+					meridian = 'PM';
+				}
+				document.getElementById('out_').value = hours + ':' + minutes + '' + meridian
+			}
+
+			//Disble Right Click
+
+			{% comment %} document.addEventListener("contextmenu",function(e){
+				e.preventDefault();
+			},false);
+
+			//Disable Shortcut
+
+			document.addEventListener("keyup",function(e){
+				if(e.ctrlkey || e.keycode==85){
+					e.stopPropagation();
+					e.preventDefault();
+				}
+			},false); {% endcomment %}
+
+			
+
+			//Get Location
+			{% comment %} window.onload = getLocation()
+			function getLocation() {
+				//alert(1)
+			  if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition);
+			  } else { 
+				x.innerHTML = "Geolocation is not supported by this browser.";
+			  }
+			}
+			
+			function showPosition(position) {
+				document.getElementById("latitude").value = position.coords.latitude  
+				document.getElementById("longitude").value = position.coords.longitude;
+			} {% endcomment %}
+
+			{% comment %} latitude  = document.getElementById("latitude")
+			longitude = document.getElementById("longitude")
+
+			document.addEventListener("DOMContentLoaded", function () {
+				let content = document.getElementById('content');
+				let textContent = `Your network status is ${navigator.onLine ? "Online" : "Offline"} `;
+				content.textContent = textContent;
+			  }); {% endcomment %}
+			  	
+
+			{% comment %} $(document).ready(function () {
+				if(navigator.geolocation)
+				{
+					navigator.geolocation.getCurrentPosition(showExactPosition)
+				}
+				else
+				{
+					alert("Geolocation is not supported");
+				}
+				function showExactPosition(position)
+				{
+					let latitude 	= "position.coords.latitude";
+					let longitude	= "position.coords.longitude";
+					document.getElementByClassName("latitude").value  = latitude;
+					document.getElementByClassName("longitude").value = longitude;
+					alert(position.coords.latitude + ' , ' + position.coords.longitude);
+				}
+			}); {% endcomment %}
+			$(document).ready(function () {
+				if ("geolocation" in navigator) {
+					navigator.geolocation.getCurrentPosition(
+						function sucess(position) {
+							console.log(position.coords.latitude + ' , ' + position.coords.longitude);
+							var logss = position.coords.latitude + ' , ' + position.coords.longitude;
+							$(".latitude").val(position.coords.latitude);
+							$(".longitude").val(position.coords.longitude);
+						},
+						function error(message) {
+							console.log(message);
+						}
+					)
+				}
+			})
+		</script>

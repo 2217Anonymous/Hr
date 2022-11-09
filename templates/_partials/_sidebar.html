@@ -1,0 +1,162 @@
+<!--app-sidebar-->
+<div class="sticky">
+    <aside class="app-sidebar " >
+        <div class="app-sidebar__logo">
+            <a class="header-brand" href="index.html">
+                <img src="{% for data in dt %} {{ dt.Logo.url }} {% endfor %}" class="header-brand-img desktop-lgo" alt="">
+                <img src="{% for data in dt %} {{ images.Logo.url }} {% endfor %}" class="header-brand-img dark-logo" alt="">
+                <img src="{% for data in dt %} {{ images.Favicon.url }} {% endfor %}" class="header-brand-img mobile-logo" alt="">
+                <img src="{% for data in dt %} {{ images.Favicon.url }} {% endfor %}" class="header-brand-img darkmobile-logo" alt="">
+            </a>
+        </div>
+        <div class="app-sidebar3">
+            <div class="main-menu">
+                <div class="app-sidebar__user">
+                    <div class="dropdown user-pro-body text-center">
+                        <div class="user-pic">
+                            <img src="{{user.Profile_Pic.url}}" alt="user-img" class="avatar-xxl rounded-circle mb-1">
+                        </div>
+                        <div class="user-info">
+                            <h6 class="pro-user-desc text-muted fs-12">{{user.Designation}}</h6>
+                            <h6 class="pro-user-desc text-muted fs-12">{{user.email}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"/></svg></div>
+                <ul class="side-menu">
+
+                    <li class="side-item side-item-category mt-4">Dashboards {% if user.is_authenticated %}  {{ user.Emoloyees.Bank_Details.Holder_Name }} {% endif %}</li>
+
+                    <li class="slide">
+                        <a class="side-menu__item active" data-bs-toggle="slide"  href="javascript:void(0);">
+                        <i class="feather feather-home  sidemenu_icon"></i>
+                        <span class="side-menu__label">Dashboards</span><i class="angle fa fa-angle-right"></i></a>
+
+                        <ul class="slide-menu">
+                            {% if user.is_authenticated and user.is_admin %}
+                                <li class="sub-slide">
+                                    <a class="sub-side-menu__item" data-bs-toggle="sub-slide"  href="{% url 'hr-dashboard' %}">
+                                        <span class="sub-side-menu__label">Hr <span class="nav-list">Dashboard</span></span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if user.is_authenticated and user.is_employee %}
+                                <li class="sub-slide">
+                                    <a class="sub-side-menu__item" data-bs-toggle="sub-slide"  href="{% url 'employee' %}">
+                                        <span class="sub-side-menu__label">Employee <span class="nav-list">Dashboard</span></span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </li>
+
+                    <li class="side-item side-item-category mt-4">Employee</li>
+                    <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide"  href="javascript:void(0);">
+                            <i class="feather feather-headphones sidemenu_icon"></i>
+                            <span class="side-menu__label">Employee<span class="nav-list"></span></span><i class="angle fa fa-angle-right"></i>
+                        </a>
+                        <ul class="slide-menu">
+                            {% if user.is_authenticated %}
+								{% if user.is_admin %}
+                                    <li class="sub-slide">
+                                        <a class="sub-side-menu__item" data-bs-toggle="sub-slide"  href="{% url 'employee-details' %}"><span class="sub-side-menu__label">Employee</span></a>
+                                    </li>
+                                    <li class="sub-slide">
+                                        <a class="sub-side-menu__item" data-bs-toggle="sub-slide"  href="{% url 'employee-register' %}"><span class="sub-side-menu__label">Employee Register</span></a>  
+                                    </li>
+                                {% endif %}
+							{% endif %}
+                        </ul>
+                    </li>
+                    {% comment %} <li class="side-item side-item-category mt-4">Chat</li>
+                    <li class="slide">
+                        <a class="side-menu__item"  href="chat-livechat.html">
+                            <i class="feather feather-message-square sidemenu_icon"></i>
+                            <span class="side-menu__label">Chat</span>
+                        </a>
+                    </li> {% endcomment %}
+                    <li class="side-item side-item-category mt-4">Attendance</li>
+                    <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide"  href="javascript:void(0);">
+                            <i class="feather feather-home  sidemenu_icon"></i>
+                            <span class="side-menu__label">Attendance</span><i class="angle fa fa-angle-right"></i>
+                        </a>
+                        <ul class="slide-menu">
+                            <li class="sub-slide">
+                                <a class="sub-side-menu__item" data-bs-toggle="sub-slide"  href="{% url 'attendance' %}"><span class="sub-side-menu__label">Attendance</span></a>
+                            </li>
+                            <li class="sub-slide">
+                                <a class="sub-side-menu__item" data-bs-toggle="sub-slide"  href="{% url 'attendance-list' %}"><span class="sub-side-menu__label">Attendance List</span></a>  
+                            </li>
+                            {% if user.is_authenticated %}
+								{% if user.is_admin %}
+                                    <li class="sub-slide">
+                                        <a class="sub-side-menu__item" data-bs-toggle="sub-slide"  href="{% url 'employee-attendance' %}"><span class="sub-side-menu__label">Employee Attendance</span></a>
+                                    </li>
+                                    <li class="sub-slide">
+                                        <a class="sub-side-menu__item" data-bs-toggle="sub-slide"  href="{% url 'manual-attendance' %}"><span class="sub-side-menu__label">Manual Attendance</span></a>  
+                                    </li>
+                                {% endif %}
+							{% endif %}
+                        </ul>
+                    </li>
+                    <li class="side-item side-item-category mt-4">Requests</li>
+                    <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide"  href="javascript:void(0);">
+                            <i class="feather feather-headphones sidemenu_icon"></i>
+                            <span class="side-menu__label">Requests<span class="nav-list"></span></span><i class="angle fa fa-angle-right"></i>
+                        </a>
+                        <ul class="slide-menu">
+                        <li class="side-menu-label1"><a  href="javascript:void(0);">Requests</a></li>
+                            <li class="sub-slide">
+                                <a class="sub-side-menu__item" data-bs-toggle="sub-slide"  href="{% url 'leave' %}"><span class="sub-side-menu__label">Leave Requests</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    {% if user.is_authenticated %}
+						{% if user.is_admin %}
+                            <li class="side-item side-item-category mt-4">Approval</li>
+                            <li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide"  href="javascript:void(0);">
+                                    <i class="feather feather-headphones sidemenu_icon"></i>
+                                    <span class="side-menu__label">Application<span class="nav-list"></span></span><i class="angle fa fa-angle-right"></i>
+                                </a>
+                                <ul class="slide-menu">
+                                <li class="side-menu-label1"><a  href="javascript:void(0);">Leave Approval</a></li>
+                                    <li class="sub-slide">
+                                        <a class="sub-side-menu__item" data-bs-toggle="sub-slide"  href="{% url 'leave-application' %}"><span class="sub-side-menu__label">Leave Approval</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        
+                            <li class="side-item side-item-category mt-4">Apps</li>
+                            <li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide"  href="javascript:void(0);">
+                                    <i class="feather feather-headphones sidemenu_icon"></i>
+                                    <span class="side-menu__label">Core Master<span class="nav-list"></span></span><i class="angle fa fa-angle-right"></i>
+                                </a>
+                                <ul class="slide-menu">
+                                    <li class="sub-slide">
+                                        <a class="sub-side-menu__item" data-bs-toggle="sub-slide"  href="/master/department/"><span class="sub-side-menu__label">Department</span></a>
+                                    </li>
+                                
+                                    <li class="sub-slide">
+                                        <a class="sub-side-menu__item" data-bs-toggle="sub-slide"  href="/master/designation/"><span class="sub-side-menu__label">Designation</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% endif %}
+					{% endif %}
+                    <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="{% url 'logout' %}">
+                            <i class="fa fa-sign-out mr-3 fs-16 my-auto"></i>
+                            <span class="side-menu__label">Logout</span></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+<!--app-sidebar closed-->

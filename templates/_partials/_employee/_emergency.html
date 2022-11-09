@@ -1,0 +1,83 @@
+<div class="modal fade"  id="Emergency_Model"  data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content modal-content-demo">
+          <div class="modal-header">
+              <h6 class="modal-title">Emergency Contact Details</h6><button aria-label="Close" class="close" data-bs-dismiss="modal" ><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form action="{% url 'emergency-contact' %}" method="POST">
+            {% csrf_token %}
+          <div class="modal-body">
+            <input type="hidden" class="form-control" value="{{request.user.id}}" name="user" id="user">
+            <div class="row">
+              <div class="col-md-12">
+                <label class="form-label">Name</label>
+                  <div class="wd-150 mg-b-30">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div><!-- input-group-prepend -->
+                      <input type="text" class="form-control" name="Emergency_Name" id="Emergency_Name" placeholder="Emergency Name">
+                    </div>
+                  </div><!-- wd-150 -->  
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-md-12">
+                <label class="form-label">Relationship</label>
+                  <div class="wd-150 mg-b-30">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div><!-- input-group-prepend -->
+                      <input type="text" class="form-control" name="Relationship" id="Relationship" placeholder="Relationship">
+                    </div>
+                  </div><!-- wd-150 -->  
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-md-12">
+                <label class="form-label">Phone Number</label>
+                  <div class="wd-150 mg-b-30">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div><!-- input-group-prepend -->
+                      <input type="phone" class="form-control" name="Emergency_Phone" id="Emergency_Phone" placeholder="Emergency Phone No">
+                    </div>
+                  </div><!-- wd-150 -->  
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-md-12">
+                <label class="form-label">Email</label>
+                  <div class="wd-150 mg-b-30">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div><!-- input-group-prepend -->
+                      <input type="email" class="form-control" name="Emergency_Email" id="Emergency_Email" placeholder="Emergency Email">
+                    </div>
+                  </div><!-- wd-150 -->  
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-md-12">
+                <label class="form-label">Emergency Address</label>
+                  <div class="wd-150 mg-b-30">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div><!-- input-group-prepend -->
+                      <textarea class="form-control mb-4" name="Emergency_Address" placeholder="Emergency Address" rows="3"></textarea> 
+                    </div>
+                  </div><!-- wd-150 -->  
+              </div>
+            </div>
+          </div>
+        </form>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-danger">Cancel</button>
+            <button type="submit" name="submit" class="btn btn-success">Save Changes</button>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,657 @@
+{% extends '../_partials/_admin_base.html' %}
+{% load static %}
+{% block content %}
+<!--Page header-->
+<div class="page-header d-xl-flex d-block">
+  <div class="page-leftheader">
+    <h4 class="page-title">Roles & Permission</h4>
+  </div>
+  <div class="page-rightheader ml-md-auto">
+    <div class="d-flex align-items-end flex-wrap my-auto right-content breadcrumb-right">
+      <div class="btn-list">
+        <button  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </button>
+        <button  class="btn btn-light" data-placement="top" data-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </button>
+        <button  class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Page header-->
+
+<!-- Row -->
+<div class="row">
+  <div class="col-lg-12 col-md-12">
+    <form  method="post" action="{% url 'permission' %}" class="card">
+      {% for message in messages %}
+        <p style="color:red;">{{message}}</p>
+      {% endfor %}
+      {% csrf_token %}
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title">Roles & Permission</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-label">Roles</label>
+              <select class="form-control custom-select search-box" name="Roles" id="Roles" data-placeholder="Choose one">
+                <option selected="selected">Administrator</option>
+                    <option value="CEO">CEO</option>
+                    <option value="Manager">Manager</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            <div class="form-group">
+              <label class="form-label">Employee
+                <span class="custom-switch-description mr-2">&emsp;</span>
+                <input type="checkbox" name="Grant_Employee" id="Grant_Employee" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle1">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Create </span>
+                    <input type="checkbox" name="Em_Create" id="Em_Create" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle2">
+                <div class="form-group" id="toggle2">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Read </span>
+                    <input type="checkbox" name="Em_Read" id="Em_Read" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle3">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Write </span>
+                    <input type="checkbox" name="Em_Write" id="Em_Write" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle4">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Delete </span>
+                    <input type="checkbox" name="Em_Delete" id="Em_Delete" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            <div class="form-group">
+              <label class="form-label">Holidays
+                <span class="custom-switch-description mr-2">&emsp;</span>
+                <input type="checkbox" name="Grant_Holidays" id="Grant_Holidays" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle5">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Create </span>
+                    <input type="checkbox" name="H_Create" id="H_Create" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle6">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Read </span>
+                    <input type="checkbox" name="H_Read" id="H_Read" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle7">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Write </span>
+                    <input type="checkbox" name="H_Write" id="H_Write" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle8">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Delete </span>
+                    <input type="checkbox" name="H_Delete" id="H_Delete" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            <div class="form-group">
+              <label class="form-label">Leaves
+                <span class="custom-switch-description mr-2">&emsp;&emsp;</span>
+                <input type="checkbox" name="Grant_Leaves" id="Grant_Leaves" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle9">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Create </span>
+                    <input type="checkbox" name="L_Create" id="L_Create" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle10">
+                <div class="form-group" id="toggle2">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Read </span>
+                    <input type="checkbox" name="L_Read" id="L_Read"  class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle11">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Write </span>
+                    <input type="checkbox" name="L_Write" id="L_Write"  class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle12">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Delete </span>
+                    <input type="checkbox" name="L_Delete" id="L_Delete" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            <div class="form-group">
+              <label class="form-label">Events
+                <span class="custom-switch-description mr-2">&emsp;&emsp;</span>
+                <input type="checkbox" name="Grant_Events" id="Grant_Events" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle13">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Create </span>
+                    <input type="checkbox" name="E_Create" id="E_Create" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle14">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Read </span>
+                    <input type="checkbox" name="E_Read" id="E_Read" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle15">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Write </span>
+                    <input type="checkbox" name="E_Write" id="E_Write" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle16">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Delete </span>
+                    <input type="checkbox" name="E_Delete" id="E_Delete" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            <div class="form-group">
+              <label class="form-label">Chat
+                <span class="custom-switch-description mr-2">&emsp;&emsp;&emsp;</span>
+                <input type="checkbox" name="Grant_Chat" id="Grant_Chat" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle17">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Create </span>
+                    <input type="checkbox" name="C_Create" id="C_Create" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle18">
+                <div class="form-group" id="toggle2">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Read </span>
+                    <input type="checkbox" name="C_Read" id="C_Read"  class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle19">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Write </span>
+                    <input type="checkbox" name="C_Write" id="C_Write"  class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle20">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Delete </span>
+                    <input type="checkbox" name="C_Delete" id="C_Delete" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            <div class="form-group">
+              <label class="form-label">Jobs
+                <span class="custom-switch-description mr-2">&emsp;&emsp;&emsp;</span>
+                <input type="checkbox" name="Grant_Jobs" id="Grant_Jobs" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle21">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Create </span>
+                    <input type="checkbox" name="J_Create" id="J_Create" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle22">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Read </span>
+                    <input type="checkbox" name="J_Read" id="J_Read" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle23">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Write </span>
+                    <input type="checkbox" name="J_Write" id="J_Write" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6 mt-4 mt-xl-0 hidden" id="toggle24">
+                <div class="form-group">
+                  <label class="custom-switch">
+                    <span class="custom-switch-description mr-2">Delete </span>
+                    <input type="checkbox" name="J_Delete" id="J_Delete" class="custom-switch-input">
+                    <span class="custom-switch-indicator custom-radius"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <button type="reset" class="btn btn-danger  ">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>           
+						<!-- End Row-->
+            <script>
+              var Grant_Employee = document.getElementById('Grant_Employee');
+              
+              Grant_Employee.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle1'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Employee = document.getElementById('Grant_Employee');
+              
+              Grant_Employee.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle2'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Employee = document.getElementById('Grant_Employee');
+              
+              Grant_Employee.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle3'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Employee = document.getElementById('Grant_Employee');
+              
+              Grant_Employee.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle4'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Holidays = document.getElementById('Grant_Holidays');
+              
+              Grant_Holidays.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle5'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Holidays = document.getElementById('Grant_Holidays');
+              
+              Grant_Holidays.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle6'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Holidays = document.getElementById('Grant_Holidays');
+              
+              Grant_Holidays.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle7'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Holidays = document.getElementById('Grant_Holidays');
+              
+              Grant_Holidays.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle8'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Leaves = document.getElementById('Grant_Leaves');
+              
+              Grant_Leaves.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle9'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Leaves = document.getElementById('Grant_Leaves');
+              
+              Grant_Leaves.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle10'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Leaves = document.getElementById('Grant_Leaves');
+              
+              Grant_Leaves.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle11'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Leaves = document.getElementById('Grant_Leaves');
+              
+              Grant_Leaves.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle12'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Events = document.getElementById('Grant_Events');
+              
+              Grant_Events.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle13'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Events = document.getElementById('Grant_Events');
+              
+              Grant_Events.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle14'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Events = document.getElementById('Grant_Events');
+              
+              Grant_Events.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle15'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Events = document.getElementById('Grant_Events');
+              
+              Grant_Events.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle16'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Chat = document.getElementById('Grant_Chat');
+              
+              Grant_Chat.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle17'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Chat = document.getElementById('Grant_Chat');
+              
+              Grant_Chat.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle18'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Chat = document.getElementById('Grant_Chat');
+              
+              Grant_Chat.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle19'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Chat = document.getElementById('Grant_Chat');
+              
+              Grant_Chat.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle20'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Jobs = document.getElementById('Grant_Jobs');
+              
+              Grant_Jobs.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle21'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Jobs = document.getElementById('Grant_Jobs');
+              
+              Grant_Jobs.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle22'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Jobs = document.getElementById('Grant_Jobs');
+              
+              Grant_Jobs.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle23'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+              <script>
+              var Grant_Jobs = document.getElementById('Grant_Jobs');
+              
+              Grant_Jobs.addEventListener('click', function() {
+                var divElem = document.getElementById('toggle24'); 
+                if (this.checked){
+                  divElem.style.display = 'block'; 
+                }
+                else {
+                  divElem.style.display = 'none';
+                }
+              });
+              </script>
+{% endblock %}

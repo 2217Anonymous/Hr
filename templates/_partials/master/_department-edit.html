@@ -1,0 +1,47 @@
+<div class="modal fade"  id="edit-dept-model{{dt.id}}" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Department</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" ><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form action="/master/dept-edit/" method="POST">
+                    {% csrf_token %}
+                  <input type="hidden" value="{{dt.id}}" name="id"/>
+                  <label class="form-label">Department Name</label>
+                  <div class="wd-150 mg-b-30">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div><!-- input-group-prepend -->
+                      <input type="text" class="form-control" value="{{dt.Department_Name}}" name="Department_Name" id="Department_Name" placeholder="Department Name">
+                    </div>
+                  </div><!-- wd-150 -->   
+                  <br>  
+                  <label class="form-label">Department Head</label>
+                  <div class="wd-150 mg-b-30">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div><!-- input-group-prepend -->
+                      <input type="text" class="form-control" value="{{dt.Department_Head}}" name="Department_Head" id="Department_Head" placeholder="Department Head">
+                    </div>
+                  </div><!-- wd-150 -->
+                  <br />
+                  <label class="form-label">Status</label>
+                  <div class="custom-controls-stacked">
+                    <label class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" name="status" value=true checked/>
+                      <span class="custom-control-label">Active</span>
+                    </label>
+                    
+                    <label class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" name="status" value=false />
+                      <span class="custom-control-label">De-Active</span>
+                    </label>
+                  </div> 
+                 <button type="submit" name="submit" class="btn btn-success">Save Changes</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+{% load static %}
+<head>
+    <!-- Meta data -->
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta content="Sort - It is one of the Major Dashboard Template which includes - HR, Employee and Job Dashboard. This template has multipurpose HTML template and also deals with Task, Project, Client and Support System Dashboard." name="description">
+    <meta content="Spruko Technologies Private Limited" name="author">
+    <meta name="keywords" content="admin dashboard, admin panel template, html admin template, dashboard html template, bootstrap 4 dashboard, template admin bootstrap 4, simple admin panel template, simple dashboard html template,  bootstrap admin panel, task dashboard, job dashboard, bootstrap admin panel, dashboards html, panel in html, bootstrap 4 dashboard"/>
+    
+    <!-- Title -->
+    <title>{% block title %} Sortscript - Hr {% endblock title %}</title>
+
+    <!--Favicon -->
+    <link rel="icon" href="{% for dt in logo %}{{dt.Favicon.url}}{% endfor %}" type="image/x-icon"/>
+    <!-- Bootstrap css -->
+    <link href="{% static 'assets/plugins/bootstrap/css/bootstrap.css' %}" rel="stylesheet" />
+    <!-- Style css -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/plugins.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/dark.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/skin-modes.css' %}" rel="stylesheet" />
+    <!-- Animate css -->
+    <link href="{% static 'assets/css/animated.css' %}" rel="stylesheet" />
+    <!--Sidemenu css -->
+    {% comment %} <link  href="{% static 'assets/css/sidemenu.css' %}" rel="stylesheet"> {% endcomment %}
+    <!-- P-scroll bar css-->
+    <link href="{% static 'assets/plugins/p-scrollbar/p-scrollbar.css' %}" rel="stylesheet" />
+    <!---Icons css-->
+    <link href="{% static 'assets/css/icons.css' %}" rel="stylesheet" />
+    <!---Sidebar css-->
+    <link href="{% static 'assets/plugins/sidebar/sidebar.css' %}" rel="stylesheet" />
+    <!-- Select2 css -->
+    <link href="{% static 'assets/plugins/select2/select2.min.css' %}" rel="stylesheet" />
+    <!-- INTERNAL Forn-wizard css-->
+    <link href="{% static 'assets/plugins/formwizard/smart_wizard.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/plugins/formwizard/smart_wizard_theme_dots.css' %}" rel="stylesheet" />
+    <!-- INTERNAL Mutipleselect css-->
+    <link rel="stylesheet" href="{% static 'assets/plugins/multipleselect/multiple-select.css' %}">
+    <!-- INTERNAL Sumoselect css-->
+    <link rel="stylesheet" href="{% static 'assets/plugins/sumoselect/sumoselect.css' %}">
+    <!-- INTERNAL Notifications  Css -->
+    <link href="{% static 'assets/plugins/notify/css/jquery.growl.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/plugins/notify/css/notifIt.css' %}" rel="stylesheet" />
+    <!-- INTERNAL Forn-wizard css-->
+    <link href="{% static 'assets/plugins/formwizard/smart_wizard.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/plugins/formwizard/smart_wizard_theme_dots.css' %}" rel="stylesheet" />
+    <!-- INTERNAL File Uploads css-->
+    <!-- INTERNAL Date Picker css -->
+	<link href="{% static 'assets/plugins/date-picker/date-picker.css' %}" rel="stylesheet" />
+    <!-- INTERNAL Fancy File Upload css -->
+    <link href="{% static 'assets/plugins/fancyuploder/fancy_fileupload.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/plugins/fileupload/css/fileupload.css' %}" rel="stylesheet" type="text/css" />
+    <!--- INTERNAL jvectormap css-->
+    <link href="{% static 'assets/plugins/jvectormap/jqvmap.css' %}" rel="stylesheet" />
+    <!-- INTERNAL Data table css -->
+    <link href="{% static 'assets/plugins/datatable/css/dataTables.bootstrap5.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/plugins/datatable/css/buttons.bootstrap5.min.css' %}"  rel="stylesheet">
+    <link href="{% static 'assets/plugins/datatable/responsive.bootstrap5.min.css' %}" rel="stylesheet" />
+    <!-- INTERNAL Time picker css -->
+    <link href="{% static 'assets/plugins/time-picker/jquery.timepicker.css' %}" rel="stylesheet" />
+    <!-- INTERNAL Daterangepicker css-->
+	<link rel="stylesheet" href="{% static 'assets/plugins/daterangepicker/daterangepicker.css' %}">
+    <!-- INTERNAL jQuery-countdowntimer css -->
+    <link href="{% static 'assets/plugins/jQuery-countdowntimer/jQuery.countdownTimer.css' %}" rel="stylesheet" />
+    <style rel="stylesheet">
+    .card{
+        box-shadow: 0 .15rem 1.75rem 0 rgba(0, 0, 0, 0.24);
+    }  
+    .avatar{
+        background : #fff no-repeat center/cover;
+    }
+    </style>
+
+</head>

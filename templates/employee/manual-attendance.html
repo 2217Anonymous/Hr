@@ -1,0 +1,144 @@
+{% extends '../_partials/_admin_base.html' %}
+{% block title %} Manual Attendance {% endblock title %} 
+{% load static %}
+{% block content %}
+<!--Page header-->
+<div class="page-header d-xl-flex d-block">
+  <div class="page-leftheader">
+    <h4 class="page-title"> Manual <span class="font-weight-normal text-muted ml-2">attendance</span></h4>
+  </div>
+</div>
+<!--End Page header-->
+
+<!--Row-->
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header border-bottom-0">
+                <h3 class="card-title">Manual Attendance</h3>
+            </div>
+            <div class="card-body">
+                <form action="{% url 'manual-attendance' %}" method="POST">
+                {% csrf_token %}
+                    <input type="hidden" id="user" value="{{dt.id}}" name="id"/>
+                    <input type="hidden" name="latitude" class="form-control latitude" type="text">
+                    <input type="hidden" name="longitude" class="form-control longitude" type="text">
+                    
+                    <div class="col-md-12 wd-150 mg-b-30">
+                        <label class="form-label">Employee</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            </div><!-- input-group-prepend -->
+                            <select class="form-control custom-select mb-4" required="" name="user" data-placeholder="Choose one">
+                            <option label="Choose one"></option>
+                            {% for data in drop_data %}
+                                <option value="{{data.id}}">{{data.Employee_Id}} - {{ data.first_name }} {{ data.last_name }}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                    </div><!-- wd-150 -->
+    
+                    <div class="col-md-12 wd-150 mg-b-30">
+                        <label class="form-label">Date <span class="text-red">*</span> </label>
+                        <div class="input-group">
+                            <input type="date" name="Manual_Dt" class="form-control">
+                            <div class="input-group-text">
+                                <i class="fa fa-calendar-o"></i>
+                            </div>
+                        </div>
+                    </div><!-- wd-150 -->   
+                <br>  
+                    
+                    <div class="col-md-12 wd-150 mg-b-30">
+                        <label class="form-label">Clock In <span class="text-red">*</span> </label>
+                        <div class="input-group">
+                            <input type="time" onchange="onInTimeChange()" id="intime" class="form-control">
+                            <input type="hidden" value="" name="In_Time" id="in_">
+                            <div class="input-group-text">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+                        </div>
+                    </div><!-- wd-150 -->
+                <br />
+                    
+                    <div class="col-md-12 wd-150 mg-b-30">
+                        <label class="form-label">Clock Out <span class="text-red">*</span> </label>
+                        <div class="input-group">
+                            <input type="time" onchange="onOutTimeChange()" id="outtime" class="form-control">
+                            <input type="hidden" value="" name="Out_Time" id="out_">
+                            <div class="input-group-text">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+                        </div>
+                    </div><!-- wd-150 -->
+                <br />    
+                    <div class="col-md-12 wd-150 mg-b-30">
+                        <label class="form-label">Remarks</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            </div><!-- input-group-prepend -->
+                            <textarea class="form-control mb-4" required="true" name="Reason" placeholder="Remarks" rows="3"></textarea>            
+                        </div>
+                    </div><!-- wd-150 -->
+
+                    <div class="card-footer">
+                        <button type="submit" name="submit" class="btn btn-success">Save Changes</button>
+                        <button type="reset" class="btn btn-danger">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header border-bottom-0">
+                <h3 class="card-title">Manual Attendance List</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-nowrap border-bottom my_res_table">
+                        <thead>
+                            <tr>
+                                <th class="border-bottom-0">User Name</th>
+                                <th class="border-bottom-0">In Time</th>
+                                <th class="border-bottom-0">Out Time</th>
+                                <th class="border-bottom-0">Date</th>
+                                <th class="border-bottom-0">Late Time</th>
+                                <th class="border-bottom-0">Early Living</th>
+                                <th class="border-bottom-0">Working Hours</th>
+                                <th class="border-bottom-0">Over Time</th>
+                                <th class="border-bottom-0">Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dt in attendance %} 
+                                <tr>
+                                    <td>
+                                        <div class="d-flex">
+                                            <span class="avatar avatar-md brround mr-3" style="background-image: url({% if dt.user.Profile_Pic == '' %} {% static 'assets/profile/profile.png' %} {% else %}{{dt.user.Profile_Pic.url}} {% endif %})"></span><span> </span>
+                                            <div class="mt-0 mt-sm-1 d-block">
+                                                <h6 class="mb-1 fs-14">{{dt.user.username}}</h6>
+                                                {% comment %} <p class="mb-0 fs-12">{{dt.user.email}}</p> {% endcomment %}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-success">{{dt.In_Time}}</span></td>
+                                    <td><span class="badge badge-danger">{{dt.Out_Time}}</span></td>
+                                    <td>{{dt.Date}}</td>
+                                    <td>{{dt.Late_Time|time:"H :i"}}</td>
+                                    <td>{{dt.Early_Leaving|time:"H :i"}}</td>
+                                    <td>{{dt.Total_Working_Hours|time:"H :i"}}</td>
+                                    <td>{{dt.Over_Time|time:"H :i"}}</td>
+                                    <td>{{dt.Reason}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

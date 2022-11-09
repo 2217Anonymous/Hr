@@ -1,0 +1,517 @@
+{% extends '../_partials/_admin_base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'assets/profile/style.css' %}">
+<!--Page header-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+        var $Department=$("#Department");
+        var $Designation=$("#Designation");
+        var $options=$Designation.find('option')
+            $Department.on('change', function(){
+              $Designation.html($options.filter('[value="'+this.value+'"]'));
+            }).trigger('change');
+  });
+</script>
+<div class="page-header d-xl-flex d-block">
+
+    <div class="page-leftheader">
+        <h4 class="page-title">New <span class="font-weight-normal text-muted ml-2">Employee</span></h4>
+    </div>
+
+    <div class="page-rightheader ml-md-auto">
+
+        <div class="align-items-end flex-wrap my-auto right-content breadcrumb-right">
+
+            <div class="btn-list">
+
+                <button  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </button>
+
+                <button  class="btn btn-light" data-placement="top" data-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </button>
+
+                <button  class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--End Page header-->
+
+<!-- Row-->
+
+<div class="row">
+
+    <div class="col-xl-12 col-md-12 col-lg-12">
+
+        <div class="card">
+
+            <div class="card-header  border-0">
+
+                <h4 class="card-title">Employees Register</h4>
+
+            </div>
+
+            <div class="card-body">
+                {% block employee_form %}
+                <form method="POST" action="{% url 'employee-register' %}" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-sm-4"></div>
+                                        <div class="col-lg-8 col-sm-4">
+                                            <div class="profile-pic-div" style="margin-top:50px;">
+                                                <img src="{% static 'assets/profile/profile.png' %}" id="photo">
+                                                <input type="file" id="file" class="dropify" name="Profile_Pic"  />
+                                                <label for="file" id="uploadBtn">Choose Photo</label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-3 col-sm-4"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+            
+                                    <div class="form-group">
+            
+                                        <label class="form-label">Employee Id <span class="text-red">*</span></label>
+            
+                                        <input type="text" class="form-control" value="{{emp_id}}" name="Employee_Id" id="Employee_Id" readonly placeholder="Enter your Employee_Id"  /> 
+            
+                                        <span class="tx-danger" style="color:red">{{fm.errors.Employee_Id}}</span>
+            
+                                    </div>
+            
+                                    <div class="form-group">
+            
+                                        <label class="form-label">User Name <span class="text-red">*</span></label>
+            
+                                        <input type="text" class="form-control" required name="username" id="username" placeholder="Enter your username"  /> 
+            
+                                        <span class="tx-danger" style="color:red">{{fm.errors.Name}}</span>
+            
+                                    </div>
+            
+                                    <div class="form-group">
+            
+                                        <label class="form-label">Password <span class="text-red">*</span></label>
+            
+                                        <input type="password" class="form-control" required name="password1" id="password1" placeholder="Enter your password"  />
+            
+                                        <span class="tx-danger" style="color:red">{{fm.errors.password1}}</span>
+            
+                                    </div>                              
+            
+                                    <div class="form-group">
+            
+                                        <label class="form-label">Confirm Password <span class="text-red">*</span></label>
+            
+                                        <input type="password" class="form-control" required name="password2" id="password2" placeholder="Enter your password"  />
+            
+                                        <span class="tx-danger" style="color:red">{{fm.errors.password2}}</span>
+            
+                                    </div>                                        
+            
+                                </div>
+                            </div>
+            
+                        </div>
+            
+                        <div class="col-lg-12">
+            
+                            <div class="row">
+            
+                                <div class="col-lg-6">
+            
+                                    <div class="form-group">
+            
+                                        <label class="form-label">First Name <span class="text-red">*</span></label>
+            
+                                        <input type="text" class="form-control" required name="first_name" id="first_name" placeholder="Enter your firstname"  />
+            
+                                        <span class="tx-danger" style="color:red">{{fm.errors.first_name}}</span>
+            
+                                    </div>
+            
+                                </div>
+            
+                                <div class="col-lg-6">
+            
+                                    <div class="form-group">
+            
+                                        <label class="form-label">Last Name <span class="text-red">*</span></label>
+            
+                                        <input type="text"  class="form-control" required name="last_name" id="last_name" placeholder="Enter your lastname"  />
+            
+                                        <span class="tx-danger" style="color:red">{{fm.errors.last_name}}</span>
+            
+                                    </div>
+            
+                                </div>
+            
+                            </div>
+            
+                            <div class="row row-sm">
+            
+                                <div class="col-lg-6">
+            
+                                    <div class="form-group">
+            
+                                        <label class="form-label">Email <span class="text-red">*</span></label>
+            
+                                        <input type="email" class="form-control" required name="email" id="email" placeholder="Enter your mail-id"  />
+            
+                                        <span class="tx-danger" style="color:red">{{fm.errors.email}}</span>
+            
+                                    </div>
+            
+                                </div>
+            
+                                <div class="col-lg-6">
+            
+                                    <div class="form-group">
+            
+                                        <label class="form-label">Phone <span class="text-red">*</span></label>
+            
+                                        <input type="phone" class="form-control" required name="Phone" id="Phone" placeholder="Enter You Number"  />
+            
+                                        <span class="tx-danger" style="color:red">{{fm.errors.Phone}}</span>
+            
+                                    </div>
+            
+                                </div>
+            
+                            </div>
+            
+                            <div class="row row-sm">
+            
+                                <div class="col-lg-6">
+            
+                                  <label class="form-label">Department <span class="text-red">*</span></label>
+            
+                                  <div class="wd-150 mg-b-30">
+            
+                                    <div class="input-group">
+            
+                                      <div class="input-group-prepend">
+            
+                                      </div><!-- input-group-prepend -->
+            
+                                      <select class="form-control" name="Department" id="Department" required id="Department" data-placeholder="Choose one">
+                                        {% block option %}
+                                            <option value="" label="Choose one" hidden></option>
+                                        {% endblock option %}
+                                            <option label="Choose one"></option>
+                                        {% for dt in Dept_data %}
+                                          <option value="{{dt.id}}">{{ dt.Department_Name }}</option>
+                                        {% endfor %}
+            
+                                      </select>
+            
+                                    </div>
+            
+                                  </div><!-- wd-150 --> 
+            
+                                </div>
+            
+                                <div class="col-lg-6">
+            
+                                  <label class="form-label">Designation <span class="text-red">*</span></label>
+            
+                                  <div class="wd-150 mg-b-30">
+            
+                                    <div class="input-group">
+            
+                                      <div class="input-group-prepend">
+            
+                                      </div><!-- input-group-prepend -->
+            
+                                      <select class="form-control" name="Designation" id="Designation" required id="Des" data-placeholder="Choose one">
+            
+                                        <option label="Choose one"></option>
+            
+                                        {% for dt in Desg_data %}
+            
+                                          <option value="{{dt.Department_Name_id}}">{{ dt.Designation }}</option>
+            
+                                        {% endfor %}
+            
+                                      </select>
+            
+                                    </div>
+            
+                                  </div><!-- wd-150 --> 
+            
+                                </div>
+            
+                            </div>
+            
+                            <br />
+            
+                            <div class="row row-sm">
+            
+                                <div class="col-lg-4">
+            
+                                    <label class="form-label">Date Of Joining <span class="text-red">*</span> </label>
+            
+                                    <div class="wd-150 mg-b-30">
+            
+                                      <div class="input-group">
+            
+                                        <div class="input-group-prepend">
+            
+                                        </div><!-- input-group-prepend -->
+            
+                                        <input type="date" required class="form-control" placeholder="YYYY-MM-DD" name="Date_Of_Joining" id="Date_Of_Joining" />
+            
+                                        <span class="tx-danger" style="color:red">{{fm.errors.Date_Of_Joining}}</span>
+            
+                                      </div>
+            
+                                    </div><!-- wd-150 --> 
+            
+                                </div>
+            
+                                <div class="col-lg-4">
+            
+                                    <label class="form-label">Resignation Date </label>
+            
+                                    <div class="wd-150 mg-b-30">
+            
+                                      <div class="input-group">
+            
+                                        <div class="input-group-prepend">
+            
+                                        </div><!-- input-group-prepend -->
+            
+                                        <input type="date" class="form-control" placeholder="YYYY-MM-DD" name="Resignation_Dt" id="Resignation_Dt" />
+            
+                                        <span class="tx-danger" style="color:red">{{fm.errors.Resignation_Dt}}</span>
+            
+                                      </div>
+            
+                                    </div><!-- wd-150 --> 
+            
+                                </div>
+            
+                                
+            
+                                <div class="col-lg-4">
+            
+                                    <label class="form-label">Termination Date </label>
+            
+                                    <div class="wd-150 mg-b-30">
+            
+                                      <div class="input-group">
+            
+                                        <div class="input-group-prepend">
+            
+                                        </div><!-- input-group-prepend -->
+            
+                                        <input type="date" class="form-control" placeholder="YYYY-MM-DD" name="Termination_Dt" id="Termination_Dt" />
+            
+                                        <span class="tx-danger" style="color:red">{{fm.errors.Termination_Dt}}</span>
+            
+                                      </div>
+            
+                                    </div><!-- wd-150 --> 
+            
+                                </div>
+            
+                            </div>
+            
+                            <br />
+            
+                            <div class="row sm">
+            
+                                <div class="col-lg-6">
+            
+                                  <label class="form-label">Shift Type <span class="text-red">*</span></label>
+            
+                                  <div class="wd-150 mg-b-30">
+            
+                                    <div class="input-group">
+            
+                                      <div class="input-group-prepend">
+            
+                                      </div><!-- input-group-prepend -->
+            
+                                      <select class="form-control" name="Shift_Type" required id="Shift_Type" data-placeholder="Choose one">
+            
+                                        <option label="Choose one"></option>
+            
+                                        {% for data in Shift %}
+            
+                                          <option value="{{data.Shift_Type}}">{{ data.Shift_Type }}</option>
+            
+                                        {% endfor %}
+            
+                                      </select>
+            
+                                    </div>
+            
+                                  </div><!-- wd-150 --> 
+            
+                                </div>
+            
+                                <div class="col-lg-6">
+            
+                                    <label class="form-label">Salary <span class="text-red">*</span> </label>
+            
+                                    <div class="wd-150 mg-b-30">
+            
+                                      <div class="input-group">
+            
+                                        <div class="input-group-prepend">
+            
+                                        </div><!-- input-group-prepend -->
+            
+                                        <input type="number" class="form-control" placeholder="$ Salary" name="Salary" id="Basic_Salary" />
+            
+                                        <span class="tx-danger" style="color:red">{{fm.errors.Basic_Salary}}</span>
+            
+                                      </div>
+            
+                                    </div><!-- wd-150 --> 
+            
+                                </div>
+            
+                            </div>
+            
+                            <br />
+            
+                            <div class="row row-sm">
+            
+                                <div class="col-lg-6">
+            
+                                    <div class="form-group">
+            
+                                        <label class="form-label">Gender <span class="text-red">*</span></label>
+            
+                                        <select class="form-control  custom-select" required name="Gender" id="Gender" data-placeholder="Choose one"  />
+            
+                                            <option label="Choose one"></option>
+            
+                                            {% for Gender in Gender_data %}
+            
+                                                <option value="{{Gender.id}}">{{Gender.Gender}}</option>
+            
+                                            {% endfor %}
+            
+                                        </select>                                    
+            
+                                        <span class="tx-danger" style="color:red">{{fm.errors.Gender}}</span>
+            
+                                    </div>
+            
+                                </div>
+            
+                                <div class="col-lg-6">
+            
+                                    <label class="form-label">Select Roll <span class="text-red">*</span></label>
+            
+                                    <div class="row">
+            
+                                        <div class="col-md-4 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            
+                                            <div class="form-group">
+            
+                                              <label class="form-label"></label>
+            
+                                              <label class="form-label">Admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+                                                <span class="custom-switch-description mr-2"></span>
+            
+                                                <input type="checkbox" name="is_admin" id="is_admin" class="custom-switch-input" />
+            
+                                                <span class="custom-switch-indicator custom-radius"></span>
+            
+                                              </label>
+            
+                                            </div>
+            
+                                        </div>
+            
+                                        <div class="col-md-4 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            
+                                            <div class="form-group">
+            
+                                                <label class="form-label"></label>
+            
+                                                <label class="form-label">Employee
+            
+                                                    <span class="custom-switch-description mr-2"></span>
+            
+                                                    <input type="checkbox" name="is_employee" id="is_employee" class="custom-switch-input" />
+            
+                                                    <span class="custom-switch-indicator custom-radius"></span>
+            
+                                                </label>
+            
+                                            </div>
+            
+                                        </div>
+            
+                                        <div class="col-md-4 mt-4 mt-xl-0" style="border:none;border-right:1px #111;">
+            
+                                            <div class="form-group">
+            
+                                                <label class="form-label"></label>
+            
+                                                <label class="form-label">Client&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+                                                    <span class="custom-switch-description mr-2"></span>
+            
+                                                    <input type="checkbox" name="is_client" class="custom-switch-input" />
+            
+                                                    <span class="custom-switch-indicator custom-radius"></span>
+            
+                                                </label>
+            
+                                            </div>
+            
+                                        </div>
+            
+                                    </div>
+            
+                                </div>
+            
+                            </div>
+            
+                        </div>
+            
+                    </div>
+            
+                    {% comment %} <table>
+            
+                        {{ emp_form.as_table }}
+            
+                    </table> {% endcomment %}
+            
+                    <div class="modal-footer">
+            
+                        <button type="reset" class="btn btn-danger">Close</button>
+            
+                        <button type="Submit" class="btn btn-success">Save changes</button>
+            
+                    </div>
+            
+                </form>
+                {% endblock employee_form %}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script src="{% static 'assets/profile/app.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,110 @@
+<style> 
+.my-avater{
+  position        : relative;
+  text-align      : center;
+  display         : inline-block;
+  background      : no-repeat center/cover;
+  background-image: none;
+  color           : #fff;
+  font-weight     : 600;
+  width           : 4.5rem;
+  height          : 2.5rem;
+  line-height     : 2.5rem;
+  font-size       : 1rem;
+}
+</style>
+<form  method="post" action="{% url 'theme' %}" enctype="multipart/form-data" class="card">
+  {% csrf_token %}
+  <div class="card-header border-bottom-0">
+    <h3 class="card-title">Theme Settings</h3>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label class="form-label">Website Name</label>
+          <input type="text" class="form-control" value="{% for theme_data in theme %}{{theme_data.Web_Name}}{% endfor %}" name="Web_Name" id="Web_Name" placeholder="Web Name">
+          <span class="tx-danger" style="color:red">{{fm.errors.Web_Name}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group mb-5 file-browser">
+          <label class="input-group-append">
+            <span class="btn btn-default btn-sm">
+              Choose Logo <input type="file" name="Logo" id="logoupload" style="display: none;">
+            </span>
+          </label>  
+        </div>						
+      </div>
+      <div class="col-lg-6">
+        <span class="my-avater1">
+          <img src="{% for theme_data in theme %}{{theme_data.Logo.url}}{% endfor %}" id="logo-img">
+        </span>
+        <span class="tx-danger" style="color:red">{{fm.errors.Logo}}</span>
+      </div>
+    </div>
+      
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group mb-5 file-browser">
+          <label class="input-group-append">
+            <span class="btn btn-default btn-sm">
+              Choose Fevicon <input type="file" name="Favicon" id="faviconupload" style="display: none;" multiple="">
+            </span>
+          </label>
+        </div>						
+      </div>
+      <div class="col-lg-6">
+        <span class="my-avater">
+          <img src="{% for theme_data in theme %}{{theme_data.Favicon.url}}{% endfor %}" id="favicon-img">
+        </span>
+        <span class="tx-danger" style="color:red">{{fm.errors.Favicon}}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group mb-5 file-browser">
+          <label class="input-group-append">
+            <span class="btn btn-default btn-sm">
+              Choose Login Logo <input type="file" name="Login" id="loginupload" style="display: none;" multiple="">
+            </span>
+          </label>
+           
+        </div>						
+      </div>
+      <div class="col-lg-6">
+        <span class="my-avater">
+          <img src="{% for theme_data in theme %}{{theme_data.Login.url}}{% endfor %}" style="height:50" id="login-img">
+        </span>
+        <span class="tx-danger" style="color:red">{{fm.errors.Logo}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="submit" class="btn btn-success">Save Changes</button>
+    <button type="reset" class="btn btn-danger  ">Cancel</button>
+  </div>
+</form>
+<script>
+	$(function(){
+		$("#logoupload").change(function(event) {
+			var x = URL.createObjectURL(event.target.files[0]);
+			$("#logo-img").attr("src",x);
+			console.log(event);
+		});
+    $("#faviconupload").change(function(event) {
+			var x = URL.createObjectURL(event.target.files[0]);
+			$("#favicon-img").attr("src",x);
+			console.log(event);
+		});
+    $("#loginupload").change(function(event) {
+			var x = URL.createObjectURL(event.target.files[0]);
+			$("#login-img").attr("src",x);
+			console.log(event);
+		});
+	})
+</script>

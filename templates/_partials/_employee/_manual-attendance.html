@@ -1,0 +1,91 @@
+<div class="modal fade"  id="manual_attendance{{dt.id}}"  data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Manual Attendance</h5>
+                <button  class="close" data-bs-dismiss="modal" aria-bs-label="Close">
+                    <span aria-bs-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="{% url 'manual-attendance' %}" method="POST">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <input type="hidden" id="user" value="{{dt.id}}" name="id"/>
+                    <input type="hidden" value="" name="latitude" class="form-control" id="latitude" type="text">
+                    <input type="hidden" value="" name="longitude" class="form-control" id="longitude" type="text">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Date</label>
+                                <div class="input-group">
+                                    <input type="date" name="Manual_Dt" class="form-control">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-calendar-o"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="form-label">Clock In</label>
+                                <div class="input-group">
+                                    <input type="time" name="In_Time" class="form-control">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="custom-switch mt-md-6">
+                                <input type="checkbox" name="Late" class="custom-switch-input orange" />
+                                <span class="custom-switch-indicator"></span>
+                                <span class="custom-switch-description text-dark">Late</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="form-label">Clock Out</label>
+                                <div class="input-group">
+                                    <input type="time" name="Out_Time" class="form-control">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="custom-switch mt-md-6">
+                                <input type="checkbox" name="Half_Day" class="custom-switch-input orange">
+                                <span class="custom-switch-indicator "></span>
+                                <label class="custom-switch-description text-dark">Half day</label>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Remarks <span class="text-danger">*</span></label>
+                                <div class="wd-150 mg-b-30">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                        </div><!-- input-group-prepend -->
+                                        <textarea class="form-control mb-4" required="true" name="Reason" placeholder="Remarks" rows="3"></textarea>            
+                                    </div>
+                                </div><!-- wd-150 --> 
+                            </div>
+                        </div>
+                    </div>             
+                </div>
+                <div class="modal-footer d-flex">
+                    <button type="submit" name="submit" class="btn btn-success">Save Changes</button>
+                    <button type="reset" class="btn btn-danger">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

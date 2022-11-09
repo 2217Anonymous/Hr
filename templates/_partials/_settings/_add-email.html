@@ -1,0 +1,64 @@
+<!--Add Department Modal -->
+<div class="modal fade"  {% block modelId %} id="adddemailmodal" {% endblock modelId %}>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"> {% block modelTitle %} Add Email {% endblock modelTitle %}</h5>
+          <button  class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" {% block modelAction %} action="{% url 'email-settings' %}" {% endblock modelAction %}>
+            {% csrf_token %}
+            {% block valueId %}{% endblock valueId %}
+            <div class="form-group">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" name="Name" id="Name" placeholder="Name" {% block valueName %} value=""{% endblock valueName %}/> 
+              <span class="tx-danger" style="color:red">{{fm.errors.Name}}</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Sender Email</label>
+              <input type="email" {% block valueSenderEmail %} value="" {% endblock valueSenderEmail %} class="form-control" name="Sender_Email" id="Sender_Email" placeholder="Sender Email">
+              <span class="tx-danger" style="color:red">{{fm.errors.Sender_Email}}</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Sender Name</label>
+              <input type="text" {% block valueSenderName %} value="" {% endblock valueSenderName %} class="form-control" name="Sender_Name" id="Sender_Name" placeholder="Sender Name">
+              <span class="tx-danger" style="color:red">{{fm.errors.Sender_Name}}</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">SMTP Host</label>
+              <input type="text" {% block valueSMTPHost %} value="" {% endblock valueSMTPHost %} class="form-control" name="SMTP_Host" id="SMTP_Host" placeholder="Sender Host">
+              <span class="tx-danger" style="color:red">{{fm.errors.SMTP_Host}}</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">SMTP User</label>
+              <input type="text" {% block valueSMTPUser %} value="" {% endblock valueSMTPUser %} class="form-control" name="SMTP_User" id="SMTP_User" placeholder="SMTP User">
+              <span class="tx-danger" style="color:red">{{fm.errors.SMTP_User}}</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">SMTP Password</label>
+              <input type="Password" {% block valueSMTPPassword %} value="" {% endblock valueSMTPPassword %} class="form-control" name="SMTP_Password" id="SMTP_Password" placeholder="SMTP Password">
+              <span class="tx-danger" style="color:red">{{fm.errors.SMTP_Password}}</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">SMTP Port</label>
+              <input type="number" {% block valueSAMTPPort %} value="" {% endblock valueSAMTPPort %} class="form-control" name="SMTP_Port" id="SMTP_Port" placeholder="SMTP Port">
+              <span class="tx-danger" style="color:red">{{fm.errors.SMTP_Port}}</span>
+            </div>
+                <div class="form-group">
+              <label class="form-label">Default Server</label>
+              <input type="text" {% block valueDefaultServer %} value="" {% endblock valueDefaultServer %} class="form-control" name="Default_Server" id="Default_Server" placeholder="Default Server">
+              <span class="tx-danger" style="color:red">{{fm.errors.Default_Server}}</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Save Changes</button>
+          <button type="reset" class="btn btn-danger  ">Cancel</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  <!-- End Add Department Modal  -->

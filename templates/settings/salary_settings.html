@@ -1,0 +1,160 @@
+{% extends '../_partials/_admin_base.html' %}
+{% load static %}
+{% block content %}
+<!--Page header-->
+<div class="page-header d-xl-flex d-block">
+  <div class="page-leftheader">
+    <h4 class="page-title">Salary Calculation</h4>
+  </div>
+  <div class="page-rightheader ml-md-auto">
+    <div class="d-flex align-items-end flex-wrap my-auto right-content breadcrumb-right">
+      <div class="btn-list">
+        <button  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </button>
+        <button  class="btn btn-light" data-placement="top" data-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </button>
+        <button  class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Page header-->
+
+<!-- Row -->
+<div class="row">
+  <div class="col-lg-12 col-md-12">
+    <form method="post" action="{% url 'salary-settings' %}" class="card">
+      {% for message in messages %}
+        <p style="color:red;">{{message}}</p>
+      {% endfor %}
+      {% csrf_token %}
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title">Salary Settings</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 mt-4 mt-xl-0">
+            <div class="form-group">
+              <label class="custom-switch">
+                <span class="custom-switch-description mr-2">DA and HRA</span>
+                <input type="checkbox" name="DA_HRA" id="DA_HRA" onclick="EnableDisableTextBox(this)" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">DA (%)</label>
+              <input type="number" class="form-control" id="DA" name="DA" required="false" placeholder="Enter DA" disabled="disabled" >
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">HRA (%)</label>
+              <input type="number" class="form-control" id="HRA" name="HRA" required="false" placeholder="Enter HRA" disabled="disabled" >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 mt-4 mt-xl-0">
+            <div class="form-group">
+              <label class="custom-switch">
+                <span class="custom-switch-description mr-2">Provident Fund Settings </span>
+                <input type="checkbox" name="PF" id="PF" onclick="EnableDisablePf(this)" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">Employee Share (%)</label>
+              <input type="number" class="form-control" id="Emp_Share" name="Emp_Share" required="false" placeholder="Enter the PF Employee Share" disabled="disabled" >
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">Organization Share (%)</label>
+              <input type="number" class="form-control" id="Org_Share" name="Org_Share" required="false" placeholder="Enter the PF Company Share" disabled="disabled" >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 mt-4 mt-xl-0">
+            <div class="form-group">
+              <label class="custom-switch">
+                <span class="custom-switch-description mr-2">ESI Settings</span>
+                <input type="checkbox" name="ESI" id="ESI" onclick="EnableDisableEsi(this)" class="custom-switch-input">
+                <span class="custom-switch-indicator custom-radius"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">Employee Share (%)</label>
+              <input type="number" class="form-control" id="E_Share" name="E_Share" required="false" placeholder="Enter the ESI Employee Share" disabled="disabled" >
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">Organization Share (%)</label>
+              <input type="number" class="form-control" id="O_Share" name="O_Share" required="false" placeholder="Enter the ESI Employee Share" disabled="disabled" >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <button type="reset" class="btn btn-danger  ">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>           
+						<!-- End Row-->
+<!-- End Row -->
+<script>
+  function EnableDisableTextBox(DA_HRA) {
+      var DA = document.getElementById("DA");
+      DA.disabled = DA_HRA.checked ? false : true;
+      if (!DA.disabled) {
+          DA.focus();
+      }
+      var HRA = document.getElementById("HRA");
+      HRA.disabled = DA_HRA.checked ? false : true;
+      if (!HRA.disabled) {
+          HRA.focus();
+      }
+  }    
+</script>
+<script>
+  function EnableDisablePf(PF) {
+      var Emp_Share = document.getElementById("Emp_Share");
+      Emp_Share.disabled = PF.checked ? false : true;
+      if (!Emp_Share.disabled) {
+          Emp_Share.focus();
+      }
+      var Org_Share = document.getElementById("Org_Share");
+      Org_Share.disabled = PF.checked ? false : true;
+      if (!Org_Share.disabled) {
+          Org_Share.focus();
+      }
+  }
+</script>
+<script>
+  function EnableDisableEsi(ESI) {
+      var E_Share = document.getElementById("E_Share");
+      E_Share.disabled = ESI.checked ? false : true;
+      if (!E_Share.disabled) {
+          E_Share.focus();
+      }
+      var O_Share = document.getElementById("O_Share");
+      O_Share.disabled = ESI.checked ? false : true;
+      if (!O_Share.disabled) {
+          O_Share.focus();
+      }
+  }
+</script>
+{% endblock %}

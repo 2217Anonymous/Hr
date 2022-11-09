@@ -1,0 +1,66 @@
+<!-- Row -->
+<div class="row">
+  <div class="col-lg-12 col-md-12">
+    <form  method="post" action="{% url 'localization' %}" class="card">
+      {% csrf_token %}
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title">Localization</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">Default Country</label>
+              {{fm.Country}}
+              <span class="tx-danger" style="color:red">{{fm.errors.Country}}</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">Date Formet</label>
+              {{fm.Date_Format}}
+              <span class="tx-danger" style="color:red">{{fm.errors.Date_Format}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">Timezone</label>
+              {{fm.Timezone}}
+              <span class="tx-danger" style="color:red">{{fm.errors.Timezone}}</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">Default Language</label>
+              {{fm.Language}}
+              <span class="tx-danger" style="color:red">{{fm.errors.Language}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">Currency Code</label>
+              {{fm.Currency_Code}}
+              <span class="tx-danger" style="color:red">{{fm.errors.Currency_Code}}</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">Currency Symbol</label>
+              {{fm.Currency_Symbol}}
+              <span class="tx-danger" style="color:red">{{fm.errors.Currency_Symbol}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <button type="reset" class="btn btn-danger  ">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>           
+						<!-- End Row-->

@@ -1,0 +1,65 @@
+{% extends '../_partials/_admin_base.html' %}
+{% block title %} Group {% endblock title %} 
+{% load static %}
+{% block content %}
+<!--Page header-->
+<div class="page-header d-xl-flex d-block">
+  <div class="page-leftheader">
+    <h4 class="page-title">Manager <span class="font-weight-normal text-muted ml-2">List</span></h4>
+  </div>
+</div>
+<!--End Page header-->
+
+<!--Row-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title">Manager List</h3>
+      </div>
+      <div class=" card-body">
+        <div class="table-responsive attendance_table mt-4 border-top">
+          <table class="mb-0 table table-bordered text-nowrap border-bottom my-datatable">
+            <thead>
+              <tr>
+                {% comment %} <th class="wd-15p border-bottom-0">Id</th> {% endcomment %}
+                <th class="border-bottom-0 w-10">User</th>
+                <th class="wd-15p border-bottom-0">Name</th>
+                <th class="wd-15p border-bottom-0">Email</th>
+                <th class="wd-15p border-bottom-0">User Name</th>
+                <th class="wd-15p border-bottom-0">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for dt in manager %}
+                <tr class="border-bottom">
+                  <td>
+                    <div class="d-flex">
+                        <span class="avatar avatar-md brround mr-3" style="background-image: url({% if dt.Profile_Pic == '' %} {% static 'assets/profile/profile.png' %} {% else %}{{dt.Profile_Pic.url}} {% endif %})"></span><span> </span>
+                    </div>
+                  </td>
+                  <td class="font-weight-semibold fs-14">{{dt.name}}</td>
+                  <td class="font-weight-semibold fs-14">{{dt.email}}</td>
+                  <td class="font-weight-semibold fs-14">{{dt.utext}}</td>
+                  <td class="text-center">
+                    <a href={% url 'user-group' dt.pk %} class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Group">
+                        <i class="feather feather-users text-danger"></i>
+                    </a>
+                    <a href={% url 'manager-del' dt.pk %} onclick="return confirm('Are sure you want to Delete? ')" class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                      <i class="feather feather-trash-2 text-danger"></i>
+                    </a>
+                    <a href={% url 'user-perms' dt.pk %} class="action-btns" data-bs-toggle="tooltip" data-bs-placement="top" title="Group">
+                        <i class="feather feather-user text-danger"></i>
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

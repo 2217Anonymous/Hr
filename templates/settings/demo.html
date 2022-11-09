@@ -1,0 +1,19 @@
+{% extends '../_partials/_admin_base.html' %}
+{% load static %}
+{% block content %}
+<label class="form-label">Department Head</label>
+<div class="wd-150 mg-b-30">
+  <div class="input-group">
+    <div class="input-group-prepend">
+    </div><!-- input-group-prepend -->
+    <select class="form-control custom-select" name="Department_Head" data-placeholder="Choose one">
+      <option label="Choose one"></option>
+      <option value="AZ">Arizona</option>
+      <option value="CO">Colorado</option>
+      <option value="ID">Idaho</option>
+      <option value="MT">Montana</option>
+      <option value="NE">Nebraska</option>
+      <option value="NM">New Mexico</option>
+  </select>
+  </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends '../_partials/_admin_base.html' %}
+{% load static %}
+{% block content %}
+<!--Page header-->
+<div class="page-header d-xl-flex d-block">
+  <div class="page-leftheader">
+    <h4 class="page-title">Leave</h4>
+  </div>
+  <div class="page-rightheader ml-md-auto">
+    <div class="align-items-end flex-wrap my-auto right-content breadcrumb-right">
+      <div class="btn-list">
+        <a href="#" class="btn btn-primary mr-3" data-toggle="modal" data-target="#leavemodal">Add Leave</a>
+        <button  class="btn btn-light" data-toggle="tooltip" data-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </button>
+        <button  class="btn btn-light" data-placement="top" data-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </button>
+        <button  class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Page header-->
+
+<!-- Row -->
+<div class="row">
+  <div class="col-xl-12 col-md-12 col-lg-12">
+    <div class="card">
+      <div class="card-header  border-0">
+        <h4 class="card-title">Leave Summary</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table  table-vcenter text-nowrap table-bordered border-bottom" id="hr-table">
+            <thead>
+              <tr>
+                <th class="border-bottom-0 w-5">Leave Type</th>
+                <th class="border-bottom-0">Number of days</th>
+                <th class="border-bottom-0">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for leave in data %}
+              <tr>
+                <td>{{leave.Leave}}</td>
+                <td>{{leave.Days}}</td>
+                <td>
+                  <a class="btn btn-primary btn-icon btn-sm" data-toggle="modal" data-target="#leave-edit{{leave.id}}" data-backdrop="static" data-keyboard="false">
+                    <i class="feather feather-edit" data-toggle="tooltip" data-original-title="Edit"></i>
+                  </a>
+                  <a href="/settings/leave-delete/{{ leave.id }}" onclick="return confirm('Are sure you want to Delete? ')" class="btn btn-danger btn-icon btn-sm" ><i class="feather feather-trash-2"></i></a>
+                </td>
+              </tr>
+              {% include '../_partials/_settings/_leave-edit.html' %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Row-->
+{% include '../_partials/_settings/_leave.html' %}
+{% endblock %}
