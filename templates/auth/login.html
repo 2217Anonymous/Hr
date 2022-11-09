@@ -52,7 +52,7 @@
 									<div class="col-md-7 col-lg-5">
 										<div class="card">
 											<div class="p-4 pt-6 text-center">
-												<img src="{% for data in login %} 	 {% endfor %}" class="header-brand-img custom-logo" style="height:50px" alt="Sortscript">
+												<img src="{% for data in login %} {{data.Login.url}} {% endfor %}" class="header-brand-img custom-logo" style="height:50px" alt="Sortscript">
 
 												<br />
 												<br />

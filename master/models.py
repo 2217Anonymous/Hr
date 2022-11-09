@@ -27,6 +27,12 @@ class State(models.Model):
     State_Name      = models.CharField(max_length=150)
     def __str__(self):
         return self.State_Name
+    
+class Cities(models.Model):
+    State_Name    = models.ForeignKey(State, on_delete=models.CASCADE)
+    City_Name      = models.CharField(max_length=150)
+    def __str__(self):
+        return self.State_Name
 
 class Blood(TrackingModel):
     Blood_Group     = models.CharField(max_length=20)

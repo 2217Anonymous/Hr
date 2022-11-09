@@ -127,6 +127,17 @@ class State(admin.ModelAdmin):
       #list_filter    = Fields
 admin.site.register(models.State,State)
 
+class City(admin.ModelAdmin):
+      Fields    = [
+        'City_Name',
+        'State_Name',
+        'id',
+      ]
+      list_display   = Fields
+      search_fields  = Fields
+      #list_filter    = Fields
+admin.site.register(models.Cities,City)
+
 class Shift(admin.ModelAdmin):
       Fields    = [
         'Shift_Type',
